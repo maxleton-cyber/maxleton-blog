@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: MaxLeton Blog
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
+author: MaxLeton
 language: en
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://maxleton-cyber.github.io/maxleton-blog
+url: maxleton.top/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
