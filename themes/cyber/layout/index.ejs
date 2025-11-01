@@ -1,0 +1,85 @@
+<section id="top" class="top">
+      <div class="top__line-text"><!-- <p>(cyberpunk edgerunners) - c 9957.2451</p> --></div>
+      <div class="keyart-border-left"><img src="static/keyart-border-left-405bdada.png"  /></div>
+      <div class="keyart-border-right"><img src="static/keyart-border-right-476988e5.png"  /></div>
+      <div class="top-left-mask"></div>
+      <div class="bottom-right-mask"></div>
+      <!-- <video autoplay loop muted playsinline>
+          <source src="static/lucy.mp4"  type="video/mp4">
+      </video> -->
+      <video poster="https://cyberpunk-static.qtlglb.com/build/images/edgerunners/top/cover-desktop@1x-7e66501a.jpg" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline">
+        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation.webm" type="video/webm">
+        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4; codecs=av01.0.05M.08">
+        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4">
+      </video>
+
+      <div class="tipblock">
+          <div class="tip">
+              <a style="color: #995db9">M</a>
+              <a style="color: #ff3131">AX</a>
+              <a style="color: #ffffff">LET</a>
+              <a style="color: #e98c17">O</a>
+              <a style="color: #ffffff">N</a>
+          </div>
+          <div class="tip tip2"><a>BLOG</a></div>
+          <!-- <div class="quote">-取悦自己，方为生存之道-</div> -->
+          <div class="quote">-人生就是图一乐-</div>
+      </div>
+      <div class="top_line">
+        <span class="module">/// WORLD.MODULE<br>loading...</span>
+    </div>
+  </section>
+<section class="main">
+
+  <main class="main-content">
+    <div class="blog-container">
+        <article class="blog-card">
+            <div class="blog-content">  
+                <div style="height: 100px;align-content: center;justify-content: center;display: flex;">
+                    <h2 class="blog-title hero glitch layers" style="font-size: 40px;align-self: center;margin: 0;" data-text="摆烂建设中。。。"><span>摆烂建设中。。。</span></h2> 
+                </div>
+            </div>
+        </article>
+        <!-- <article class="blog-card">
+            <img src="https://source.unsplash.com/random/800x400/?technology"  alt="技术博客" class="blog-image">
+            <div class="blog-content">
+                <div class="blog-date"><i class="far fa-calendar-alt"></i>2025-04-28</div>
+                <h2 class="blog-title">探索CSS视差滚动效果的实现原理</h2>
+                <p class="blog-excerpt">在现代网页设计中，视差滚动效果能够为用户带来沉浸式的浏览体验。本文将深入探讨如何使用纯CSS实现高性能的视差效果，包括背景图以不同速度滚动的技巧，以及如何优化性能...</p>
+                <a href="#" class="read-more">阅读更多</a>
+            </div>
+        </article> -->
+    </div>
+</main>
+</section>
+
+  <script>
+      // 导航栏滚动显示效果
+      window.addEventListener('scroll',  function() {
+          const navbar = document.querySelector('.navbar'); 
+          if (window.scrollY  > 100) {
+              navbar.classList.add('show'); 
+          } else {
+              navbar.classList.remove('show'); 
+          }
+      });
+
+      // 视差滚动效果
+      window.addEventListener('scroll',  function() {
+          const scrollPosition = window.scrollY; 
+          const video = document.querySelector('.top  video');
+          const blogCards = document.querySelectorAll('.blog-card'); 
+          
+          // 背景视频视差效果
+          if (video) {
+              video.style.transform  = `scale(${1.1 + scrollPosition * 0.0002}) translateY(${scrollPosition * 0.5}px)`;
+          }
+          
+          // 博客卡片反向视差效果
+          // blogCards.forEach((card,  index) => {
+          //     const speed = 0.2;
+          //     const offset = scrollPosition * speed;
+          //     card.style.transform  = `translateY(${-offset}px)`;
+          // });
+      });
+  </script>
