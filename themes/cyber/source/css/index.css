@@ -39,6 +39,7 @@
         margin: 0;
         padding: 0;
         height: 100%;
+        scrollbar-width: none;
     }
   .top  video {
         position: absolute;
@@ -66,8 +67,8 @@
 
   .top{
     height: 100vh;
-    /* max-height: 790px; */
-    min-height: 500px;
+    /* max-height: 790px;
+    min-height: 500px; */
     scroll-margin-top: 0;
     width: 100%;
   }
@@ -81,7 +82,7 @@
   .top::after{
     background: linear-gradient(180deg,transparent,#0c0c0c);
     bottom: 0;
-    height: 302px;
+    height: 30%;
   }
   
   
@@ -109,7 +110,7 @@
   .tipblock{
     position: absolute;
     right:6rem;
-    top: 30rem;
+    top: 60%;
     width: auto;
   }
   .tip{
@@ -151,7 +152,7 @@
     padding-left: 140px;
     padding-right: 42px;
     position: absolute;
-    top: 1%;
+    top: 9px;
     width: 100%;
   }
   .top__line-text::before{
@@ -159,18 +160,17 @@
     content: "";
     height: 1px;
     left: 42px;
-    margin-top: -1px;
+    margin-top: 6px;
     opacity: .76;
     position: absolute;
-    top: 50%;
-    width: 95px;
+    width: 98px;
   }
   .top__line-text::after{
     border-top: 1px solid #fcee0a;
     content: "";
     display: inline-flex;
     flex: 1 1 auto;
-    margin-top: 8px;
+    margin-top: 6px;
     opacity: .76;
     
   }
@@ -476,7 +476,7 @@ p{
 
 /* 页脚 */
 .footer {
-    background-color: rgba(10, 10, 10, 0.95);
+    background-color: rgba(10, 10, 10, 1);
     padding: 40px 0;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -545,12 +545,15 @@ p{
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .tip {
-        font-size: 2.5rem;
+    .tipblock {
+        position: absolute;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, 20%);
     }
     
-    .tip2 {
-        font-size: 1.5rem;
+    .tip {
+        font-size: 2.5rem;
     }
     
     .quote {
@@ -574,6 +577,12 @@ p{
     .tipblock {
         padding: 15px;
         max-width: 90%;
+    }
+    .tipblock {
+        position: absolute;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, 20%);
     }
     
     .tip {
