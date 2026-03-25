@@ -1,4 +1,10 @@
 <section id="top" class="top">
+      <!-- 汉堡菜单按钮 - 仅在手机模式下显示 -->
+      <button class="mobile-menu-button" id="mobileMenuButton">
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
       <div class="top__line-text"><!-- <p>(cyberpunk edgerunners) - c 9957.2451</p> --></div>
       <div class="keyart-border-left"><img src="static/keyart-border-left-405bdada.png"  /></div>
       <div class="keyart-border-right"><img src="static/keyart-border-right-476988e5.png"  /></div>
@@ -7,10 +13,10 @@
       <!-- <video autoplay loop muted playsinline>
           <source src="static/lucy.mp4"  type="video/mp4">
       </video> -->
-      <video poster="https://cyberpunk-static.qtlglb.com/build/images/edgerunners/top/cover-desktop@1x-7e66501a.jpg" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline">
-        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation.webm" type="video/webm">
-        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4; codecs=av01.0.05M.08">
-        <source src="https://cyberpunk-ec.qtlglb.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4">
+      <video poster="https://www.cyberpunk.net/build/images/edgerunners/top/cover-desktop@1x-7e66501a.jpg" autoplay="autoplay" loop="loop" muted="muted" playsinline="playsinline">
+        <source src="https://cdn-l-cyberpunk.cdprojektred.com/video/Edgerunners_KV_Animation.webm" type="video/webm">
+        <source src="https://cdn-l-cyberpunk.cdprojektred.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4; codecs=av01.0.05M.08">
+        <source src="https://cdn-l-cyberpunk.cdprojektred.com/video/Edgerunners_KV_Animation_AV1.mp4" type="video/mp4">
       </video>
 
       <div class="tipblock">
@@ -23,7 +29,7 @@
           </div>
           <div class="tip tip2"><a>BLOG</a></div>
           <!-- <div class="quote">-取悦自己，方为生存之道-</div> -->
-          <div class="quote">-人生就是图一乐-</div>
+          <div class="quote">-朝为田舍埋头郎，暮登天子宝殿堂-</div>
       </div>
       <div class="top_line">
         <span class="module">/// WORLD.MODULE<br>loading...</span>
@@ -33,53 +39,224 @@
 
   <main class="main-content">
     <div class="blog-container">
-        <article class="blog-card">
-            <div class="blog-content">  
-                <div style="height: 100px;align-content: center;justify-content: center;display: flex;">
-                    <h2 class="blog-title hero glitch layers" style="font-size: 40px;align-self: center;margin: 0;" data-text="摆烂建设中。。。"><span>摆烂建设中。。。</span></h2> 
+        <!-- 文章列表 -->
+        <div class="articles-list">
+            <% if (site.posts.length) { %>
+                <% site.posts.each(function(post) { %>
+                    <article class="blog-card">
+                        <div class="blog-content">
+                            <div class="blog-date"><i class="far fa-calendar-alt"></i><%= post.date.format('YYYY-MM-DD') %></div>
+                            <h2 class="blog-title"><a href="<%= post.path %>" class="blog-title-link"><%= post.title %></a></h2>
+                            <p class="blog-excerpt"><%= post.excerpt || post.content.substring(0, 150) + '...' %></p>
+                            <div class="blog-meta">
+                                <div class="blog-categories">
+                                    <% post.categories.each(function(category) { %>
+                                        <a href="<%= category.path %>" class="category-tag"><%= category.name %></a>
+                                    <% }); %>
+                                </div>
+                            </div>
+                            <a href="<%= post.path %>" class="read-more">阅读更多</a>
+                        </div>
+                    </article>
+                <% }); %>
+            <% } else { %>
+                <article class="blog-card">
+                    <div class="blog-content">  
+                        <div style="height: 100px;align-content: center;justify-content: center;display: flex;">
+                            <h2 class="blog-title hero glitch layers" style="font-size: 40px;align-self: center;margin: 0;" data-text="摆烂建设中。。。"><span>摆烂建设中。。。</span></h2> 
+                        </div>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+        
+        <!-- 右侧名片和分类标签栏目 -->
+        <div class="sidebar">
+            <!-- 名片栏目 -->
+            <div class="card profile-card">
+                <div class="profile-avatar">
+                    <img src="<%= theme.avatar || 'https://via.placeholder.com/100' %>" alt="<%= config.author %>" class="avatar-img">
+                </div>
+                <h3 class="profile-name"><%= config.author %></h3>
+                <p class="profile-bio"><%= config.description %></p>
+                <div class="profile-social">
+                    <% if (theme.social) { %>
+                        <% for (let key in theme.social) { %>
+                            <a href="<%= theme.social[key] %>" target="_blank" class="social-link">
+                                <i class="fab fa-<%= key %>"></i>
+                            </a>
+                        <% } %>
+                    <% } %>
                 </div>
             </div>
-        </article>
-        <!-- <article class="blog-card">
-            <img src="https://source.unsplash.com/random/800x400/?technology"  alt="技术博客" class="blog-image">
-            <div class="blog-content">
-                <div class="blog-date"><i class="far fa-calendar-alt"></i>2025-04-28</div>
-                <h2 class="blog-title">探索CSS视差滚动效果的实现原理</h2>
-                <p class="blog-excerpt">在现代网页设计中，视差滚动效果能够为用户带来沉浸式的浏览体验。本文将深入探讨如何使用纯CSS实现高性能的视差效果，包括背景图以不同速度滚动的技巧，以及如何优化性能...</p>
-                <a href="#" class="read-more">阅读更多</a>
+            
+            <!-- 分类标签栏目 -->
+            <div class="card categories-card">
+                <h3 class="card-title">分类</h3>
+                <ul class="categories-list">
+                    <% site.categories.each(function(category) { %>
+                        <li class="category-item">
+                            <a href="<%= category.path %>" class="category-link">
+                                <%= category.name %>
+                                <span class="category-count"><%= category.length %></span>
+                            </a>
+                        </li>
+                    <% }); %>
+                </ul>
             </div>
-        </article> -->
+            
+            <div class="card tags-card">
+                <h3 class="card-title">标签</h3>
+                <div class="tags-cloud">
+                    <% site.tags.each(function(tag) { %>
+                        <a href="<%= tag.path %>" class="tag-link" style="font-size: <%= 12 + tag.length * 2 %>px">
+                            <%= tag.name %>
+                        </a>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 </section>
 
+<%- partial('_partial/mobile-menu') %>
+
   <script>
-      // 导航栏滚动显示效果
-      window.addEventListener('scroll',  function() {
+      // 导航栏滚动显示效果 - 仅在桌面模式下启用
+      function handleNavbarScroll() {
           const navbar = document.querySelector('.navbar'); 
-          if (window.scrollY  > 100) {
-              navbar.classList.add('show'); 
-          } else {
-              navbar.classList.remove('show'); 
+          if (navbar && window.innerWidth > 768) {
+              if (window.scrollY > 100) {
+                  navbar.classList.add('show'); 
+              } else {
+                  navbar.classList.remove('show'); 
+              }
           }
-      });
+      }
+
+      // 初始化导航栏显示逻辑
+      function initNavbar() {
+          const navbar = document.querySelector('.navbar');
+          if (navbar) {
+              // 移除所有滚动事件监听器，避免重复绑定
+              window.removeEventListener('scroll', handleNavbarScroll);
+              
+              if (window.innerWidth > 768) {
+                  navbar.style.display = 'block';
+                  window.addEventListener('scroll', handleNavbarScroll);
+                  handleNavbarScroll(); // 立即执行一次，确保初始状态正确
+              } else {
+                  navbar.style.display = 'none'; // 手机模式下隐藏导航栏
+              }
+          }
+      }
 
       // 视差滚动效果
-      window.addEventListener('scroll',  function() {
+      function handleScroll() {
           const scrollPosition = window.scrollY; 
-          const video = document.querySelector('.top  video');
-          const blogCards = document.querySelectorAll('.blog-card'); 
+          const video = document.querySelector('.top video');
           
           // 背景视频视差效果
           if (video) {
-              video.style.transform  = `scale(${1.1 + scrollPosition * 0.0002}) translateY(${scrollPosition * 0.5}px)`;
+              video.style.transform = `scale(${1.1 + scrollPosition * 0.0002}) translateY(${scrollPosition * 0.5}px)`;
+          }
+      }
+
+      // 汉堡菜单控制
+      function initMobileMenu() {
+          const mobileMenuButton = document.getElementById('mobileMenuButton');
+          const closeMenuButton = document.getElementById('closeMenu');
+          const mobileMenu = document.getElementById('mobileMenu');
+          const mobileMenuContainer = document.querySelector('.mobile-menu-container');
+          
+          // 移除之前可能存在的事件监听器
+          function removeEventListeners() {
+              if (mobileMenuButton) {
+                  const newButton = mobileMenuButton.cloneNode(true);
+                  mobileMenuButton.parentNode.replaceChild(newButton, mobileMenuButton);
+              }
+              if (closeMenuButton) {
+                  const newCloseButton = closeMenuButton.cloneNode(true);
+                  closeMenuButton.parentNode.replaceChild(newCloseButton, closeMenuButton);
+              }
+              if (mobileMenu) {
+                  const menuLinks = mobileMenu.querySelectorAll('.mobile-menu-link');
+                  menuLinks.forEach((link, index) => {
+                      const newLink = link.cloneNode(true);
+                      link.parentNode.replaceChild(newLink, link);
+                  });
+              }
           }
           
-          // 博客卡片反向视差效果
-          // blogCards.forEach((card,  index) => {
-          //     const speed = 0.2;
-          //     const offset = scrollPosition * speed;
-          //     card.style.transform  = `translateY(${-offset}px)`;
-          // });
+          // 重新绑定事件监听器
+          removeEventListeners();
+          
+          // 获取新的元素引用
+          const newMobileMenuButton = document.getElementById('mobileMenuButton');
+          const newCloseMenuButton = document.getElementById('closeMenu');
+          const newMobileMenu = document.getElementById('mobileMenu');
+          const newMobileMenuContainer = document.querySelector('.mobile-menu-container');
+          
+          if (newMobileMenuButton && newCloseMenuButton && newMobileMenu && newMobileMenuContainer) {
+              // 显示菜单
+              newMobileMenuButton.addEventListener('click', function(e) {
+                  e.stopPropagation(); // 防止事件冒泡
+                  newMobileMenu.classList.add('open');
+                  newMobileMenuContainer.classList.add('open');
+                  document.body.classList.add('menu-open');
+              });
+              
+              // 关闭菜单
+              newCloseMenuButton.addEventListener('click', function(e) {
+                  e.stopPropagation(); // 防止事件冒泡
+                  newMobileMenu.classList.remove('open');
+                  newMobileMenuContainer.classList.remove('open');
+                  document.body.classList.remove('menu-open');
+              });
+              
+              // 点击菜单项后关闭菜单
+              const menuLinks = newMobileMenu.querySelectorAll('.mobile-menu-link');
+              menuLinks.forEach(link => {
+                  link.addEventListener('click', function(e) {
+                      e.stopPropagation(); // 防止事件冒泡
+                      newMobileMenu.classList.remove('open');
+                      newMobileMenuContainer.classList.remove('open');
+                      document.body.classList.remove('menu-open');
+                  });
+              });
+              
+              // 点击菜单外部关闭菜单
+              newMobileMenuContainer.addEventListener('click', function(e) {
+                  if (e.target === newMobileMenuContainer) {
+                      newMobileMenu.classList.remove('open');
+                      newMobileMenuContainer.classList.remove('open');
+                      document.body.classList.remove('menu-open');
+                  }
+              });
+          }
+      }
+
+      // 初始化函数
+      function init() {
+          // 移除可能重复的事件监听器
+          window.removeEventListener('scroll', handleScroll);
+          window.removeEventListener('load', init);
+          window.removeEventListener('resize', init);
+          
+          // 重新添加事件监听器
+          window.addEventListener('scroll', handleScroll);
+          initNavbar();
+          initMobileMenu();
+      }
+
+      // 窗口加载完成后初始化
+      window.addEventListener('load', init);
+
+      // 窗口大小变化时重新初始化
+      window.addEventListener('resize', function() {
+          // 使用防抖避免频繁执行
+          clearTimeout(window.resizeTimeout);
+          window.resizeTimeout = setTimeout(init, 200);
       });
   </script>
