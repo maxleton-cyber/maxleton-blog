@@ -1,473 +1,182 @@
 
-.hero {
-  font-size: clamp(40px, 10vw, 100px);
-  line-height: 1;
-  display: inline-block;
-  color: #fff;
-  z-index: 2;
-  letter-spacing: 10px;
+/* 导入主要样式 */
+@import 'index.css';
 
-  /* Bright things in dark environments usually cast that light, giving off a glow */
-  filter: drop-shadow(0 1px 3px);
-}
-
-.layers {
-  position: relative;
-}
-
-.layers::before,
-.layers::after {
-  content: attr(data-text);
-  position: absolute;
-  width: 110%;
-  z-index: -1;
-}
-
-.layers::before {
-  top: 10px;
-  left: 15px;
-  color: #e0287d;
-}
-
-.layers::after {
-  top: 5px;
-  left: -10px;
-  color: #1bc7fb;
-}
-
-.single-path {
-  clip-path: polygon(
-    0% 12%,
-    53% 12%,
-    53% 26%,
-    25% 26%,
-    25% 86%,
-    31% 86%,
-    31% 0%,
-    53% 0%,
-    53% 84%,
-    92% 84%,
-    92% 82%,
-    70% 82%,
-    70% 29%,
-    78% 29%,
-    78% 65%,
-    69% 65%,
-    69% 66%,
-    77% 66%,
-    77% 45%,
-    85% 45%,
-    85% 26%,
-    97% 26%,
-    97% 28%,
-    84% 28%,
-    84% 34%,
-    54% 34%,
-    54% 89%,
-    30% 89%,
-    30% 58%,
-    83% 58%,
-    83% 5%,
-    68% 5%,
-    68% 36%,
-    62% 36%,
-    62% 1%,
-    12% 1%,
-    12% 34%,
-    60% 34%,
-    60% 57%,
-    98% 57%,
-    98% 83%,
-    1% 83%,
-    1% 53%,
-    91% 53%,
-    91% 84%,
-    8% 84%,
-    8% 83%,
-    4% 83%
-  );
-}
-
-.paths {
-  animation: paths 5s step-end infinite;
-}
-
-@keyframes paths {
-  0% {
-    clip-path: polygon(
-      0% 43%,
-      83% 43%,
-      83% 22%,
-      23% 22%,
-      23% 24%,
-      91% 24%,
-      91% 26%,
-      18% 26%,
-      18% 83%,
-      29% 83%,
-      29% 17%,
-      41% 17%,
-      41% 39%,
-      18% 39%,
-      18% 82%,
-      54% 82%,
-      54% 88%,
-      19% 88%,
-      19% 4%,
-      39% 4%,
-      39% 14%,
-      76% 14%,
-      76% 52%,
-      23% 52%,
-      23% 35%,
-      19% 35%,
-      19% 8%,
-      36% 8%,
-      36% 31%,
-      73% 31%,
-      73% 16%,
-      1% 16%,
-      1% 56%,
-      50% 56%,
-      50% 8%
-    );
-  }
-
-  5% {
-    clip-path: polygon(
-      0% 29%,
-      44% 29%,
-      44% 83%,
-      94% 83%,
-      94% 56%,
-      11% 56%,
-      11% 64%,
-      94% 64%,
-      94% 70%,
-      88% 70%,
-      88% 32%,
-      18% 32%,
-      18% 96%,
-      10% 96%,
-      10% 62%,
-      9% 62%,
-      9% 84%,
-      68% 84%,
-      68% 50%,
-      52% 50%,
-      52% 55%,
-      35% 55%,
-      35% 87%,
-      25% 87%,
-      25% 39%,
-      15% 39%,
-      15% 88%,
-      52% 88%
-    );
-  }
-
-  30% {
-    clip-path: polygon(
-      0% 53%,
-      93% 53%,
-      93% 62%,
-      68% 62%,
-      68% 37%,
-      97% 37%,
-      97% 89%,
-      13% 89%,
-      13% 45%,
-      51% 45%,
-      51% 88%,
-      17% 88%,
-      17% 54%,
-      81% 54%,
-      81% 75%,
-      79% 75%,
-      79% 76%,
-      38% 76%,
-      38% 28%,
-      61% 28%,
-      61% 12%,
-      55% 12%,
-      55% 62%,
-      68% 62%,
-      68% 51%,
-      0% 51%,
-      0% 92%,
-      63% 92%,
-      63% 4%,
-      65% 4%
-    );
-  }
-
-  45% {
-    clip-path: polygon(
-      0% 33%,
-      2% 33%,
-      2% 69%,
-      58% 69%,
-      58% 94%,
-      55% 94%,
-      55% 25%,
-      33% 25%,
-      33% 85%,
-      16% 85%,
-      16% 19%,
-      5% 19%,
-      5% 20%,
-      79% 20%,
-      79% 96%,
-      93% 96%,
-      93% 50%,
-      5% 50%,
-      5% 74%,
-      55% 74%,
-      55% 57%,
-      96% 57%,
-      96% 59%,
-      87% 59%,
-      87% 65%,
-      82% 65%,
-      82% 39%,
-      63% 39%,
-      63% 92%,
-      4% 92%,
-      4% 36%,
-      24% 36%,
-      24% 70%,
-      1% 70%,
-      1% 43%,
-      15% 43%,
-      15% 28%,
-      23% 28%,
-      23% 71%,
-      90% 71%,
-      90% 86%,
-      97% 86%,
-      97% 1%,
-      60% 1%,
-      60% 67%,
-      71% 67%,
-      71% 91%,
-      17% 91%,
-      17% 14%,
-      39% 14%,
-      39% 30%,
-      58% 30%,
-      58% 11%,
-      52% 11%,
-      52% 83%,
-      68% 83%
-    );
-  }
-
-  76% {
-    clip-path: polygon(
-      0% 26%,
-      15% 26%,
-      15% 73%,
-      72% 73%,
-      72% 70%,
-      77% 70%,
-      77% 75%,
-      8% 75%,
-      8% 42%,
-      4% 42%,
-      4% 61%,
-      17% 61%,
-      17% 12%,
-      26% 12%,
-      26% 63%,
-      73% 63%,
-      73% 43%,
-      90% 43%,
-      90% 67%,
-      50% 67%,
-      50% 41%,
-      42% 41%,
-      42% 46%,
-      50% 46%,
-      50% 84%,
-      96% 84%,
-      96% 78%,
-      49% 78%,
-      49% 25%,
-      63% 25%,
-      63% 14%
-    );
-  }
-
-  90% {
-    clip-path: polygon(
-      0% 41%,
-      13% 41%,
-      13% 6%,
-      87% 6%,
-      87% 93%,
-      10% 93%,
-      10% 13%,
-      89% 13%,
-      89% 6%,
-      3% 6%,
-      3% 8%,
-      16% 8%,
-      16% 79%,
-      0% 79%,
-      0% 99%,
-      92% 99%,
-      92% 90%,
-      5% 90%,
-      5% 60%,
-      0% 60%,
-      0% 48%,
-      89% 48%,
-      89% 13%,
-      80% 13%,
-      80% 43%,
-      95% 43%,
-      95% 19%,
-      80% 19%,
-      80% 85%,
-      38% 85%,
-      38% 62%
-    );
-  }
-
-  1%,
-  7%,
-  33%,
-  47%,
-  78%,
-  93% {
-    clip-path: none;
-  }
-}
-
-.movement {
-  /* Normally this position would be absolute & on the layers, set to relative here so we can see it on the div */
-  position: relative;
-  animation: movement 8s step-end infinite;
-}
-
-@keyframes movement {
-  0% {
-    top: 0px;
-    left: -20px;
-  }
-
-  15% {
-    top: 10px;
-    left: 10px;
-  }
-
-  60% {
-    top: 5px;
-    left: -10px;
-  }
-
-  75% {
-    top: -5px;
+/* 汉堡菜单按钮样式 - 相对section定位 */
+.mobile-menu-button {
+    position: relative;
+    top: 20px;
     left: 20px;
-  }
-
-  100% {
-    top: 10px;
-    left: 5px;
-  }
+    z-index: 10;
+    width: 40px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none; /* 默认隐藏，在媒体查询中显示 */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 0;
+    float: left; /* 使用浮动避免影响其他元素 */
+    clear: both;
 }
 
-.opacity {
-  animation: opacity 5s step-end infinite;
+.mobile-menu-button span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(153, 93, 185, 0.5);
 }
 
-@keyframes opacity {
-  0% {
-    opacity: 0.1;
-  }
-
-  5% {
-    opacity: 0.7;
-  }
-
-  30% {
-    opacity: 0.4;
-  }
-
-  45% {
-    opacity: 0.6;
-  }
-
-  76% {
-    opacity: 0.4;
-  }
-
-  90% {
-    opacity: 0.8;
-  }
-
-  1%,
-  7%,
-  33%,
-  47%,
-  78%,
-  93% {
-    opacity: 0;
-  }
+/* 汉堡菜单容器 */
+.mobile-menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0; /* 默认透明 */
+    visibility: hidden; /* 隐藏可见性 */
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* 淡入淡出动画 */
 }
 
-.font {
-  animation: font 7s step-end infinite;
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid #995db9;
+    box-shadow: 0 0 20px rgba(153, 93, 185, 0.3);
+    transition: left 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    transform: translateX(-20px); /* 初始位置稍微偏左 */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-@keyframes font {
-  0% {
-    font-weight: 100;
-    color: #e0287d;
-    filter: blur(3px);
-  }
+.mobile-menu.open {
+    left: 0;
+    transform: translateX(0); /* 移动到正确位置 */
+}
 
-  20% {
-    font-weight: 500;
-    color: #fff;
-    filter: blur(0);
-  }
+.mobile-menu-container.open {
+    opacity: 1; /* 完全显示 */
+    visibility: visible; /* 可见 */
+}
 
-  50% {
-    font-weight: 300;
-    color: #1bc7fb;
-    filter: blur(2px);
-  }
+/* 菜单项激活时禁止页面滚动 */
+body.menu-open {
+    overflow: hidden;
+}
 
-  60% {
+/* 移动菜单头部 */
+.mobile-menu-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(153, 93, 185, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-menu-logo {
+    /* 使用与nav-logo相同的字体样式 */
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
-    filter: blur(0);
-  }
-
-  90% {
-    font-weight: 500;
-    color: #e0287d;
-    filter: blur(6px);
-  }
+    color: var(--gold-accent);
+    text-decoration: none;
+    letter-spacing: 2px;
 }
 
-.glitch span {
-  animation: paths 5s step-end infinite;
+/* 关闭按钮 */
+.mobile-menu-close {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.glitch::before {
-  animation: paths 5s step-end infinite, opacity 5s step-end infinite,
-    font 8s step-end infinite, movement 10s step-end infinite;
+.mobile-menu-close span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    position: absolute;
+    transition: all 0.3s ease;
 }
 
-.glitch::after {
-  animation: paths 5s step-end infinite, opacity 5s step-end infinite,
-    font 7s step-end infinite, movement 8s step-end infinite;
+.mobile-menu-close span:nth-child(1) {
+    transform: rotate(45deg);
 }
 
-.hero-container {
-  position: relative;
-  padding: 200px 0;
-  text-align: center;
+.mobile-menu-close span:nth-child(2) {
+    transform: rotate(-45deg);
+}
+
+/* 移动菜单链接 */
+.mobile-menu-links {
+    flex: 1;
+    padding: 20px;
+}
+
+.mobile-menu-link {
+    /* 使用与nav-link相同的字体样式 */
+    display: block;
+    padding: 15px 0;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(153, 93, 185, 0.2);
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.mobile-menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--gold-accent);
+    transition: width 0.3s ease;
+}
+
+.mobile-menu-link:hover {
+    color: var(--gold-accent);
+}
+
+.mobile-menu-link:hover::after {
+    width: 100%;
+}
+
+.mobile-menu-link:last-child {
+    border-bottom: none;
+}
+
+/* 媒体查询 - 移动设备 */
+@media (max-width: 768px) {
+    .mobile-menu-button {
+        display: flex;
+    }
+    
+    .navbar {
+        display: none !important;
+    }
 }
