@@ -1,0 +1,10 @@
+<h2><%- page.tag %></h2>
+    <ul>
+        <% site.tags.each(tag=>{ %>
+            <li>
+                <a href="<%- url_for(tag.path) %>">
+                    <%- tag.name  %> 
+                </a>
+            </li>
+        <% }) %>
+    </ul>

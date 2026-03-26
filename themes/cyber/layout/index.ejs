@@ -41,8 +41,8 @@
     <div class="blog-container">
         <!-- 文章列表 -->
         <div class="articles-list">
-            <% if (site.posts.length) { %>
-                <% site.posts.each(function(post) { %>
+            <% if (page.posts.length) { %>
+                <% page.posts.each(function(post) { %>
                     <article class="blog-card">
                         <div class="blog-content">
                             <div class="blog-date"><i class="far fa-calendar-alt"></i><%= post.date.format('YYYY-MM-DD') %></div>
@@ -69,7 +69,10 @@
                 </article>
             <% } %>
         </div>
-        
+        <%- paginator({
+            prev_text: '<',
+            next_text: '>'
+        }) %>
         <!-- 右侧名片和分类标签栏目 -->
         <div class="sidebar">
             <!-- 名片栏目 -->
