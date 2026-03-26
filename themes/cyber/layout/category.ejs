@@ -1,0 +1,11 @@
+<h2><%- page.category %></h2>
+ <ul>
+<% site.categories.each(category=>{ %>
+    <li>
+        <a href="<%- url_for(category.path) %>">
+            <%- category.name  %> 
+            (<%- category.length %>)
+        </a>
+    </li>
+<% }) %>
+</ul>

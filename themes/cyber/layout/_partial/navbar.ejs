@@ -3,10 +3,10 @@
         <a href="#" class="nav-logo">MAXLETON</a>
         <div class="nav-links">
             <a href="#" class="nav-link">首页</a>
-            <a href="#" class="nav-link">技术</a>
-            <a href="#" class="nav-link">设计</a>
-            <a href="#" class="nav-link">生活</a>
-            <a href="#" class="nav-link">关于</a>
+            <a href="<%-url_for(config.archive_dir)%>" class="nav-link">归档</a>
+            <a href="<%-url_for(config.category_dir)%>" class="nav-link">分类</a>
+            <a href="<%-url_for(config.tag_dir)%>" class="nav-link">标签</a>
+            <a href="<%-url_for(config.about_dir)%>" class="nav-link">关于</a>
         </div>
     </div>
 </nav>
