@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= config.title || 'LUCY // NETWORK_ACCESS' %></title>
+    <%- css('css/style.css') %>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="moon-footer"></div>
+
+    <div class="container">
+        <%- include('_partial/header') %>
+
+        <header class="banner">
+            <div class="banner-light-ray"></div>
+            
+            <div style="position: absolute; top: 20px; left: 60px; font-family: monospace; font-size: 10px; opacity: 0.6;">
+                [ ENCRYPTION: ACTIVE ]<br>
+                [ LOCATION: NIGHT_CITY ]<br>
+                [ TARGET: THE_MOON ]
+            </div>
+
+            <h2 class="hero glitch layers" data-text="MAXLETON"><span>MAXLETON</span></h2>
+            <div class="banner-title">
+                <span>LOG 00.SYS</span>
+            </div>
+            
+            <div>
+                <div class="banner-subtitle">// STATUS: DEEP_DIVE_ENABLED</div>
+                <div style="display: inline-block; font-family: monospace; font-size: 12px; margin-left: 20px; font-weight: bold;">
+                    ACCESS_KEY: **********
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 40px; right: 15%; width: 60px; height: 30px; border-left: 10px solid black; border-right: 20px solid black; opacity: 0.8;"></div>
+        </header>
+
+        <%- body %>
+
+        <%- include('_partial/footer') %>
+    </div>
+</body>
+</html>
