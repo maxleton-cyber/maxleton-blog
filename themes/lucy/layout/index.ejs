@@ -1,0 +1,55 @@
+<div class="grid-layout">
+    <main>
+        <% if (page.posts && page.posts.length > 0) { %>
+            <% page.posts.each(function(post) { %>
+                <article class="post-item">
+                    <div class="post-date">DATA_ID: <%= post.date ? post.date.format('YYYY_MMDD') : '2077_0000' %></div>
+                    <h2 class="post-title"><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
+                    <p class="post-excerpt"><%= post.excerpt || post.content.substring(0, 150) + '...' %></p>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <article class="post-item">
+                <div class="post-date">DATA_ID: 2077_0520</div>
+                <h2 class="post-title">逃离重力：月球移民的虚幻梦想</h2>
+                <p class="post-excerpt">如果你愿意支付 250,000 欧元，你就能买到一张去往宁静海的单程票。但别忘了，重力并不是唯一的束缚...</p>
+            </article>
+
+            <article class="post-item">
+                <div class="post-date">DATA_ID: 2077_0412</div>
+                <h2 class="post-title">深度解析：荒坂 ICE 的破解逻辑</h2>
+                <p class="post-excerpt">单分子线介入、神经插槽过热。如何在烧掉脑子之前，从数据堡垒中带走最关键的三个字节。</p>
+            </article>
+
+            <article class="post-item">
+                <div class="post-date">DATA_ID: 2077_0305</div>
+                <h2 class="post-title">边缘行者的生存法则</h2>
+                <p class="post-excerpt">别在夜之城寻找名字。在这里，你唯一能留下的只有死后的骨灰盒，或者一段被他人传唱的都市传说。</p>
+            </article>
+        <% } %>
+    </main>
+
+    <aside>
+        <section class="sidebar-section">
+            <div class="profile-card">
+                <span class="avatar-label">USER_IDENTIFICATION</span>
+                <h3 class="user-name">LUCY_00</h3>
+                <p class="user-bio">Netrunner. Dreamer. Leaving for the Moon.</p>
+                <div style="margin-top: 15px; border-top: 1px solid #333; padding-top: 10px;">
+                    <span style="font-size: 0.7rem; color: var(--lucy-pink);">TRACE_PROGRESS: 0%</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="sidebar-section">
+            <h4 style="font-family: monospace; margin-bottom: 15px; color: var(--cyber-yellow);">// CATEGORIES</h4>
+            <div class="category-cloud">
+                <a href="#" class="cat-tag">Hacking</a>
+                <a href="#" class="cat-tag">Luna</a>
+                <a href="#" class="cat-tag">Arasaka</a>
+                <a href="#" class="cat-tag">Memory</a>
+                <a href="#" class="cat-tag">Cyberware</a>
+            </div>
+        </section>
+    </aside>
+</div>
