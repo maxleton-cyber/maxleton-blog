@@ -1,8 +1,17 @@
+<style>
+    .cyber-tile-big {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cyber-tile-big:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+    }
+</style>
 <div class="grid-layout">
     <main>
         <% if (page.posts && page.posts.length > 0) { %>
             <% page.posts.each(function(post) { %>
-                <article class="cyber-tile-big fg-dark" style="background-color: var(--dark-gray);">
+                <article class="cyber-tile-big fg-dark" style="background-color: var(--dark-gray);padding: 15px 30px;">
                     <div class="post-date">DATA_ID: <%= post.date ? post.date.format('YYYY_MMDD') : '2077_0000' %></div>
                     <h2 class="post-title"><a href="<%= url_for(post.path) %>"><%= post.title %></a></h2>
                     <p class="post-excerpt"><%= strip_html(post.excerpt || post.content).substring(0, 150) %><% if ((post.excerpt || post.content).length > 150) { %>...<% } %></p>

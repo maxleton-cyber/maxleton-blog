@@ -8,6 +8,10 @@
     <%- css('css/cyberstyle.css') %>
     <%- css('css/cyber-grid.css') %>
     <%- css('css/cyberpunk.css') %>
+    <%- css('css/highlight/atom-one-dark') %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+
 </head>
 <body>
     <div class="noise"></div>
@@ -16,6 +20,7 @@
     <div class="container">
         <%- include('_partial/header') %>
 
+        <% if (!is_post()) { %>
         <header class="banner">
             <div class="banner-light-ray"></div>
             
@@ -39,10 +44,72 @@
 
             <div style="position: absolute; bottom: 40px; right: 15%; width: 60px; height: 30px; border-left: 10px solid black; border-right: 20px solid black; opacity: 0.8;"></div>
         </header>
+        <% } %>
 
         <%- body %>
 
         <%- include('_partial/footer') %>
     </div>
+    <%- js('js/highlight.min') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach(function(block) {
+                hljs.highlightElement(block);
+            });
+            
+            setTimeout(function() {
+                document.querySelectorAll('pre').forEach(function(pre) {
+                    if (!pre.querySelector('.code-lang-label') && !pre.querySelector('.copy-code-btn')) {
+                        var code = pre.querySelector('code');
+                        if (code) {
+                            var langLabel = document.createElement('div');
+                            langLabel.className = 'code-lang-label';
+                            
+                            var langClass = code.className.match(/language-(\w+)/);
+                            var langName = langClass ? langClass[1].toUpperCase() : 'CODE';
+                            langLabel.textContent = langName;
+                            
+                            pre.style.position = 'relative';
+                            pre.appendChild(langLabel);
+                            
+                            var copyBtn = document.createElement('button');
+                            copyBtn.className = 'copy-code-btn';
+                            copyBtn.textContent = 'COPY';
+                            
+                            copyBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                var text = code.textContent;
+                                
+                                navigator.clipboard.writeText(text).then(function() {
+                                    copyBtn.textContent = 'COPIED!';
+                                    copyBtn.style.background = 'var(--yellow)';
+                                    setTimeout(function() {
+                                        copyBtn.textContent = 'COPY';
+                                        copyBtn.style.background = 'var(--cyan)';
+                                    }, 2000);
+                                }).catch(function(err) {
+                                    console.error('Copy failed:', err);
+                                    var textarea = document.createElement('textarea');
+                                    textarea.value = text;
+                                    document.body.appendChild(textarea);
+                                    textarea.select();
+                                    document.execCommand('copy');
+                                    document.body.removeChild(textarea);
+                                    copyBtn.textContent = 'COPIED!';
+                                    copyBtn.style.background = 'var(--yellow)';
+                                    setTimeout(function() {
+                                        copyBtn.textContent = 'COPY';
+                                        copyBtn.style.background = 'var(--cyan)';
+                                    }, 2000);
+                                });
+                            });
+                            
+                            pre.appendChild(copyBtn);
+                        }
+                    }
+                });
+            }, 200);
+        });
+    </script>
 </body>
 </html>

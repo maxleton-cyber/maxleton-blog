@@ -4,8 +4,7 @@ categories:
   - latex
 tags:
   - demo
-date: 2022-04-8 15:33:01
-
+date: 2022-04-08 15:33:01
 ---
 
 > written by [Smileyan](https://smileyan.cn)
@@ -68,7 +67,7 @@ int main() {
 
 java 代码
 
-```java
+```Java
 package cn.smileyan;
 
 /**
@@ -130,7 +129,6 @@ html
 </html>
 ```
 
-
 css
 
 ```css
@@ -189,87 +187,82 @@ $ yum -y install
 $ make & make install
 ```
 
-
-
 # 字母
 
+|      字母     |    表达式   |       字母      |      符号     |
+| :---------: | :------: | :-----------: | :---------: |
+|   $\theta$  |  \theta  |   $\upsilon$  |   \upsilon  |
+|   $\sigma$  |  \sigma  |   $\lambda$   |   \lambda   |
+|   $\alpha$  |  \alpha  |    $\Omega$   |    \Omega   |
+|   $\beta$   |   \beta  |     $\Phi$    |     \Phi    |
+|   $\gamma$  |  \gamma  |   $\varphi$   |   \varphi   |
+|    $\phi$   |   \phi   |     $\Pi$     |     \pi     |
+|    $\mu$    |    \mu   |    $\omega$   |    \omega   |
+|    $\xi$    |    \xi   |     $\psi$    |     \psi    |
+|    $\pi$    |    \pi   |     $\chi$    |     \chi    |
+|   $\delta$  |  \delta  |     $\tau$    |     \tau    |
+|  $\epsilon$ | \epsilon |   $\epsilon$  |   \epsilon  |
+|   $\zeta$   |   \zeta  | $\varepsilon$ | \varepsilon |
+|    $\eta$   |   \eta   |     $\rho$    |     \rho    |
+| $\partial$​ | \partial |     <br />    |    <br />   |
 
-
-|    字母    |  表达式  |     字母      |    符号     |
-| :--------: | :------: | :-----------: | :---------: |
-|  $\theta$  |  \theta  |  $\upsilon$   |  \upsilon   |
-|  $\sigma$  |  \sigma  |   $\lambda$   |   \lambda   |
-|  $\alpha$  |  \alpha  |   $\Omega$    |   \Omega    |
-|  $\beta$   |  \beta   |    $\Phi$     |    \Phi     |
-|  $\gamma$  |  \gamma  |   $\varphi$   |   \varphi   |
-|   $\phi$   |   \phi   |     $\Pi$     |     \pi     |
-|   $\mu$    |   \mu    |   $\omega$    |   \omega    |
-|   $\xi$    |   \xi    |    $\psi$     |    \psi     |
-|   $\pi$    |   \pi    |    $\chi$     |    \chi     |
-|  $\delta$  |  \delta  |    $\tau$     |    \tau     |
-| $\epsilon$ | \epsilon |  $\epsilon$   |  \epsilon   |
-|  $\zeta$   |  \zeta   | $\varepsilon$ | \varepsilon |
-|   $\eta$   |   \eta   |    $\rho$     |    \rho     |
-| $\partial$​ | \partial |               |             |
-
-
-有一些字母的大写就是大写第一个字符即可。比如 $\Tau$ \Tau 是 $\tau$ \tau 的大写。 
+有一些字母的大写就是大写第一个字符即可。比如 $\Tau$ \Tau 是 $\tau$ \tau 的大写。
 
 哥特体：
 
 比如说字母 S，\mathfrak {S} ：<big><big>$\mathfrak{S}$ </big></big>
 
-|  字体名  |    表达式     |        例子        |
-| :------: | :-----------: | :----------------: |
-|  手写体  | \mathcal { }  | $\mathcal {A,B,C}$ |
-|  哥特体  | \mathfrak { } | $\mathfrak{A,B,C}$ |
-|  正粗体  |  \mathbf { }  |  $\mathbf{A,B,C}$  |
+|  字体名 |      表达式      |         例子         |
+| :--: | :-----------: | :----------------: |
+|  手写体 |  \mathcal { } | $\mathcal {A,B,C}$ |
+|  哥特体 | \mathfrak { } | $\mathfrak{A,B,C}$ |
+|  正粗体 |  \mathbf { }  |  $\mathbf{A,B,C}$  |
 | 黑板粗体 |  \mathbb { }  |  $\mathbb{A,B,C}$  |
-|   斜体   |  \mathif { }  |  $\mathit{A,B,C}$  |
-|  罗马体  |  \mathrm { }  |  $\mathrm{A,B,C}$  |
+|  斜体  |  \mathif { }  |  $\mathit{A,B,C}$  |
+|  罗马体 |  \mathrm { }  |  $\mathrm{A,B,C}$  |
 
 ### 运算符号
 
-|              符号              |            表达式            |       解释（索引）       |
-| :----------------------------: | :--------------------------: | :----------------------: |
-|            $\times$            |            \times            |           乘法           |
-|             $\div$             |             \div             |           除法           |
-|             $\pm$              |             \pm              |     正负号（正或负）     |
-|           $\forall$            |           \forall            |        任意，所有        |
-|           $\exists$            |       \exist , \exists       |           存在           |
-|            $\not=$             |            \not=             |      不等于，不等号      |
-|           $\approx$            |           \approx            |      约等于，约等号      |
-|             $\geq$             |          \geq，\ge           |         大于等于         |
-|             $\leq$             |             \leq             |         小于等于         |
-|             $\gg$              |             \gg              |          远大于          |
-|             $\ll$              |             \ll              |          远小于          |
-|            $\nabla$            |            \nabla            | 算子，倒三角，偏导，梯度 |
-|             $\in$              |             \in              |           属于           |
-|           $\subset$            |        \sub ，\subset        |          包含于          |
-|          $\subseteq$           |          \subseteq           |          包含于          |
-|          $\subsetneq$          |          \subsetneq          |         真包含于         |
-|            $\cdot$             |            \cdot             |         点，点乘         |
-|           $\partial$           |           \partial           |          求偏导          |
-|            $\infty$            |            \infty            |           无穷           |
-|           $\propto$            |           \propto            |       近似于，似然       |
-|           $\dot{x}$            |           \dot{x}            |       上点，导数点       |
-|           $\vec{AB}$           |           \vec{AB}           |           向量           |
-|    $\int_{-N}^{N} e^x\, dx$    |    \int_{-N}^{N} e^x\, dx    |           积分           |
-|   $\iint_{D}^{W} \, dx\,dy$    |   \iint_{D}^{W} \, dx\,dy    |         双重积分         |
-| $\iiint_{E}^{V} \, dx\,dy\,dz$ | \iiint_{E}^{V} \, dx\,dy\,dz |         三重积分         |
-|       $\sum_{k=1}^N k^2$       |       \sum_{k=1}^N k^2       |           求和           |
-|      $\prod_{i=1}^N x_i$       |      \prod_{i=1}^N x_i       |           连乘           |
-|             $\sim$             |             \sim             |          波浪号          |
-|           $\backsim$           |           \backsim           |         反波浪号         |
-|              $\S$              |              \S              |         章节符号         |
-|             $\ell$             |             \ell             |           范数           |
-|              $\|$              |              \\              |                          |
-|          $\text{\/}$           |          \text{\\/}          |          反斜杆          |
-|               \                |              \               |          反斜杠          |
-|      $\lfloor x \rfloor$       |      \lfloor x \rfloor       |         向下取整         |
-|       $\lceil x \rceil$        |       \lceil x \rceil        |         向上取整         |
+|              符号              |             表达式            |    解释（索引）    |
+| :--------------------------: | :------------------------: | :----------: |
+|           $\times$           |           \times           |      乘法      |
+|            $\div$            |            \div            |      除法      |
+|             $\pm$            |             \pm            |   正负号（正或负）   |
+|           $\forall$          |           \forall          |     任意，所有    |
+|           $\exists$          |      \exist , \exists      |      存在      |
+|            $\not=$           |            \not=           |    不等于，不等号   |
+|           $\approx$          |           \approx          |    约等于，约等号   |
+|            $\geq$            |          \geq，\ge          |     大于等于     |
+|            $\leq$            |            \leq            |     小于等于     |
+|             $\gg$            |             \gg            |      远大于     |
+|             $\ll$            |             \ll            |      远小于     |
+|           $\nabla$           |           \nabla           | 算子，倒三角，偏导，梯度 |
+|             $\in$            |             \in            |      属于      |
+|           $\subset$          |        \sub ，\subset       |      包含于     |
+|          $\subseteq$         |          \subseteq         |      包含于     |
+|         $\subsetneq$         |         \subsetneq         |     真包含于     |
+|            $\cdot$           |            \cdot           |     点，点乘     |
+|          $\partial$          |          \partial          |      求偏导     |
+|           $\infty$           |           \infty           |      无穷      |
+|           $\propto$          |           \propto          |    近似于，似然    |
+|           $\dot{x}$          |           \dot{x}          |    上点，导数点    |
+|          $\vec{AB}$          |          \vec{AB}          |      向量      |
+|   $\int\_{-N}^{N} e^x, dx$   |   \int\_{-N}^{N} e^x, dx   |      积分      |
+|   $\iint\_{D}^{W} , dx,dy$   |   \iint\_{D}^{W} , dx,dy   |     双重积分     |
+| $\iiint\_{E}^{V} , dx,dy,dz$ | \iiint\_{E}^{V} , dx,dy,dz |     三重积分     |
+|      $\sum\_{k=1}^N k^2$     |      \sum\_{k=1}^N k^2     |      求和      |
+|     $\prod\_{i=1}^N x\_i$    |     \prod\_{i=1}^N x\_i    |      连乘      |
+|            $\sim$            |            \sim            |      波浪号     |
+|          $\backsim$          |          \backsim          |     反波浪号     |
+|             $\S$             |             \S             |     章节符号     |
+|            $\ell$            |            \ell            |      范数      |
+|             $\|$             |             \\             |    <br />    |
+|          $\text{/}$          |         \text{\\/}         |      反斜杆     |
+|              \\              |             \\             |      反斜杠     |
+|      $\lfloor x \rfloor$     |      \lfloor x \rfloor     |     向下取整     |
+|       $\lceil x \rceil$      |       \lceil x \rceil      |     向上取整     |
 
-反斜杠可以考虑不加入 \$$ 中间直接使用，需要输入两个 反斜杠即可。
+反斜杠可以考虑不加入 $$ 中间直接使用，需要输入两个 反斜杠即可。
 
 ```bash
 方法一：
@@ -306,8 +299,6 @@ $$
 
 ```
 
-
-
 对应的效果如图：
 
 <p>
@@ -322,7 +313,6 @@ z & = & \frac xy
 $$
 </p>
 
-
 <p>
 $$
 F^{HLLC}=\left\{
@@ -335,7 +325,6 @@ F_R       &      & {S_R \leq 0}
 $$
 </p>
 
-
 <p>
 $$
 f(x)=
@@ -346,36 +335,24 @@ f(x)=
 $$
 </p>
 
-
-
 字母头上有：
 
-
-
-|                符号                 |              表达式               | 解释(索引) |
-| :---------------------------------: | :-------------------------------: | :--------: |
-|              $\vec{c}$              |              \vec{c}              |   向量c    |
-|        $\overleftarrow{ab}$         |        \overleftarrow{ab}         |  指向左边  |
+|                  符号                 |                表达式                | 解释(索引) |
+| :---------------------------------: | :-------------------------------: | :----: |
+|              $\vec{c}$              |              \vec{c}              |   向量c  |
+|         $\overleftarrow{ab}$        |         \overleftarrow{ab}        |  指向左边  |
 |        $\overrightarrow{ab}$        |          \overrightarrow          |  指向右边  |
-|              $\hat{A}$              |              \hat{A}              |     帽     |
-|            $\widehat{A}$            |             \widehat              | 大帽，宽帽 |
-|           $\overline{ab}$           |             \overline             |   上划线   |
-|          $\underline{ab}$           |            \underline             |   下划线   |
-|       $\overset{\frown}{ab}$        |             \overset              |    上弧    |
-|          $\widetilde{ab}$           |          \widetilde{ab}           |  上波浪号  |
-|    $\overbrace{1+2+\cdots+100}$     |    \overbrace{1+2+\cdots+100}     |   上括号   |
-| $\overbrace{1+2+\cdots+100}^{5050}$ | \overbrace{1+2+\cdots+100}^{5050} |   上括号   |
-|     $\underbrace{a+b+\cdots+z}$     |     \underbrace{a+b+\cdots+z}     |   下括号   |
-|  $\underbrace{a+b+\cdots+z}_{26}$   |  \underbrace{a+b+\cdots+z}_{26}   |   下括号   |
+|              $\hat{A}$              |              \hat{A}              |    帽   |
+|            $\widehat{A}$            |              \widehat             |  大帽，宽帽 |
+|           $\overline{ab}$           |             \overline             |   上划线  |
+|           $\underline{ab}$          |             \underline            |   下划线  |
+|        $\overset{\frown}{ab}$       |              \overset             |   上弧   |
+|           $\widetilde{ab}$          |           \widetilde{ab}          |  上波浪号  |
+|     $\overbrace{1+2+\cdots+100}$    |     \overbrace{1+2+\cdots+100}    |   上括号  |
+| $\overbrace{1+2+\cdots+100}^{5050}$ | \overbrace{1+2+\cdots+100}^{5050} |   上括号  |
+|     $\underbrace{a+b+\cdots+z}$     |     \underbrace{a+b+\cdots+z}     |   下括号  |
+|  $\underbrace{a+b+\cdots+z}\_{26}$  |  \underbrace{a+b+\cdots+z}\_{26}  |   下括号  |
 
+<https://blog.csdn.net/young951023/article/details/79601664>
 
-
-
-
-
-
-
-https://blog.csdn.net/young951023/article/details/79601664
-
-https://www.cnblogs.com/q735613050/p/7474449.html
-
+<https://www.cnblogs.com/q735613050/p/7474449.html>
