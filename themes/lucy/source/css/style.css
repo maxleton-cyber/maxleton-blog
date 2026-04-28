@@ -317,7 +317,6 @@ nav a:hover { color: var(--lucy-pink); }
 .grid-layout {
     display: grid;
     grid-template-columns: 1fr 300px;
-    gap: 60px;
 }
 
 @media (max-width: 850px) {
@@ -369,13 +368,11 @@ nav a:hover { color: var(--lucy-pink); }
     font-family: monospace;
     color: var(--lucy-blue);
     font-size: 0.8rem;
-    margin-bottom: 5px;
 }
 
 .post-title {
     font-size: 1.8rem;
     font-weight: 800;
-    margin-bottom: 10px;
     text-transform: uppercase;
 }
 
@@ -393,7 +390,6 @@ nav a:hover { color: var(--lucy-pink); }
 .post-excerpt {
     color: var(--text-muted);
     font-size: 0.95rem;
-    max-width: 500px;
     line-height: 1.6;
 }
 
