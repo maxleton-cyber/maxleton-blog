@@ -1,0 +1,218 @@
+/* Cyberpunk Blog — Edge Runner Official Yellow */
+/* Minimal structure + iconic cyber-yellow accent on deep dark base */
+
+/* === Brand Color System === */
+:root {
+  /* Primary — Cyberpunk: Edge Runners official yellow */
+  --color-primary: #fcee0a;
+  --color-primary-hover: #e5d609;
+  --color-primary-muted: rgba(252, 238, 10, 0.12);
+  --color-primary-subtle: rgba(252, 238, 10, 0.05);
+
+  /* Background system — deep dark with warm blue-black undertone */
+  --color-bg-base: #0a0a0f;
+  --color-bg-elevated: #12121a;
+  --color-bg-surface: #1a1a25;
+  --color-bg-overlay: rgba(10, 10, 15, 0.85);
+
+  /* Text system */
+  --color-text-primary: #e8e8f0;
+  --color-text-secondary: #8888a0;
+  --color-text-muted: #55556a;
+  --color-text-accent: #fcee0a;
+  --color-text-on-primary: #0a0a0f;
+
+  /* Border system */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(252, 238, 10, 0.35);
+  --color-border-focus: #fcee0a;
+
+  /* State colors (semantic only) */
+  --state-success: #00e676;
+  --state-warning: #ffab00;
+  --state-error: #ff3d71;
+  --state-info: #448aff;
+
+  /* === Typography === */
+  --font-display: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter spacing for display */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* Font weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* === Shape System === */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 9999px;
+
+  /* === Spacing System (4px base) === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* === Shadow System — border-first, shadow for floating layers only === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(252, 238, 10, 0.10);
+  --shadow-glow-strong: 0 0 40px rgba(252, 238, 10, 0.18);
+
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* === Typography Classes === */
+.cb-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-title {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-body {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.cb-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+}
+
+.cb-caption {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* === Utility: Neon glow effect === */
+.cb-glow-text {
+  text-shadow: 0 0 10px rgba(252, 238, 10, 0.4), 0 0 30px rgba(252, 238, 10, 0.12);
+}
+
+.cb-glow-border {
+  box-shadow: var(--shadow-glow);
+}
+
+.cb-glow-border-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+/* === Utility: Surface card === */
+.cb-surface {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.cb-surface-elevated {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* === Utility: Gradient accents === */
+.cb-gradient-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.5;
+}
+
+/* === Utility: Grid overlay (subtle cyber texture) === */
+.cb-grid-overlay {
+  background-image:
+    linear-gradient(rgba(252, 238, 10, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252, 238, 10, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* === Utility: Scanline effect === */
+.cb-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+}
+
+/* === @theme inline: Tailwind v4 CSS variable bridge === */
+@theme inline {
+  --color-background: var(--color-bg-base);
+  --color-foreground: var(--color-text-primary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-text-on-primary);
+  --color-muted: var(--color-bg-surface);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-primary-muted);
+  --color-accent-foreground: var(--color-text-accent);
+  --color-border: var(--color-border-default);
+  --color-input: var(--color-border-default);
+  --color-ring: var(--color-border-focus);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}

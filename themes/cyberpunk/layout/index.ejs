@@ -1,0 +1,133 @@
+<main>
+    <!-- HERO SECTION -->
+    <section class="cb-hero">
+        <img src="<%= url_for('static/hero-visual.jpg') %>" alt="Cyberpunk cityscape" class="cb-hero-bg" onerror="this.style.display='none'">
+        <div class="cb-hero-overlay"></div>
+        <div class="cb-hero-grid"></div>
+        <div class="cb-hero-content">
+            <p class="cb-hero-tag"><%= theme.tagline %></p>
+            <h1 class="cb-display cb-glow-text cb-hero-title"><%= theme.hero_title %></h1>
+            <p class="cb-body cb-hero-subtitle"><%= theme.hero_subtitle %></p>
+            <div class="cb-gradient-line cb-hero-gradient"></div>
+        </div>
+        <a href="#posts-section" class="cb-hero-scroll">
+            <span class="cb-hero-scroll-label">SCROLL</span>
+            <i data-lucide="chevrons-down" style="width:20px;height:20px;"></i>
+        </a>
+    </section>
+
+    <!-- CONTENT: TWO-COLUMN GRID -->
+    <section id="posts-section" class="cb-content-section">
+        <div class="cb-blog-grid">
+            <!-- MAIN CONTENT -->
+            <div>
+                <div class="cb-section-heading">
+                    <h2 class="cb-title">近期文章</h2>
+                    <div class="cb-gradient-line"></div>
+                </div>
+
+                <!-- POSTS LIST -->
+                <div>
+                    <% page.posts.each(function(post, i){ %>
+                        <a href="<%- url_for(post.path) %>" class="cb-post-item">
+                            <div class="cb-post-meta">
+                                <% if (post.sticky) { %>
+                                <span class="cb-post-pin">置顶</span>
+                                <% } %>
+                                <% if (post.categories && post.categories.length) { %>
+                                <span class="cb-post-tag"><%= post.categories.first().name %></span>
+                                <% } %>
+                                <span class="cb-post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
+                            </div>
+                            <h4 class="cb-title cb-post-title"><%= post.title %></h4>
+                            <p class="cb-body cb-post-excerpt cb-post-excerpt-1"><%= strip_html(post.excerpt || post.content) %></p>
+                        </a>
+                    <% }) %>
+                </div>
+
+                <!-- PAGINATION -->
+                <% if (page.total > 1) { %>
+                <nav class="cb-pagination" aria-label="分页导航">
+                    <% if (page.prev) { %>
+                        <a href="<%- url_for(page.prev_link) %>#posts-section" aria-label="上一页">
+                            <i data-lucide="chevron-left" style="width:14px;height:14px;"></i>
+                        </a>
+                    <% } %>
+                    <% for (var i = 1; i <= page.total; i++) { %>
+                        <% if (i === page.current) { %>
+                            <span class="current"><%= i %></span>
+                        <% } else if (i === 1 || i === page.total || Math.abs(i - page.current) <= 1) { %>
+                            <a href="<%- url_for(i === 1 ? config.root : page.base + 'page/' + i + '/') %>#posts-section"><%= i %></a>
+                        <% } else if (Math.abs(i - page.current) === 2) { %>
+                            <span class="space">...</span>
+                        <% } %>
+                    <% } %>
+                    <% if (page.next) { %>
+                        <a href="<%- url_for(page.next_link) %>#posts-section" aria-label="下一页">
+                            <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                        </a>
+                    <% } %>
+                </nav>
+                <% } %>
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="cb-sidebar">
+                <!-- Profile card -->
+                <div class="cb-profile-card">
+                    <img src="<%- url_for(theme.avatar) %>" alt="Avatar" class="cb-profile-avatar">
+                    <div class="cb-profile-info">
+                        <h2 class="cb-display cb-profile-name"><%= theme.author_name %></h2>
+                        <p class="cb-mono cb-profile-role"><%= theme.author_role %></p>
+                    </div>
+                    <div class="cb-gradient-line" style="width:48px;"></div>
+                    <p class="cb-body cb-profile-bio"><%= theme.author_bio %></p>
+                    <div class="cb-social">
+                        <% if (theme.social.github) { %>
+                        <a href="<%= theme.social.github %>" class="cb-social-btn" aria-label="GitHub">
+                            <i data-lucide="github" style="width:15px;height:15px;"></i>
+                        </a>
+                        <% } %>
+                        <% if (theme.social.twitter) { %>
+                        <a href="<%= theme.social.twitter %>" class="cb-social-btn" aria-label="Twitter/X">
+                            <i data-lucide="twitter" style="width:15px;height:15px;"></i>
+                        </a>
+                        <% } %>
+                        <% if (theme.social.email) { %>
+                        <a href="<%= theme.social.email %>" class="cb-social-btn" aria-label="Email">
+                            <i data-lucide="mail" style="width:15px;height:15px;"></i>
+                        </a>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <% if (site.categories && site.categories.length) { %>
+                <div class="cb-widget">
+                    <h3 class="cb-caption cb-widget-title">分类</h3>
+                    <nav class="cb-category-list">
+                        <% site.categories.sort('name', 1).each(function(cat){ %>
+                            <a href="<%- url_for(cat.path) %>">
+                                <span class="cb-category-name"><%= cat.name %></span>
+                                <span class="cb-category-count"><%= cat.length %></span>
+                            </a>
+                        <% }) %>
+                    </nav>
+                </div>
+                <% } %>
+
+                <!-- Tags -->
+                <% if (site.tags && site.tags.length) { %>
+                <div class="cb-widget">
+                    <h3 class="cb-caption cb-widget-title">标签</h3>
+                    <div class="cb-tag-cloud">
+                        <% site.tags.sort('name', 1).each(function(tag){ %>
+                            <a href="<%- url_for(tag.path) %>" class="cb-tag"><%= tag.name %></a>
+                        <% }) %>
+                    </div>
+                </div>
+                <% } %>
+            </aside>
+        </div>
+    </section>
+</main>

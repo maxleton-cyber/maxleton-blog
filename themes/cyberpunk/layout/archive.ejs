@@ -1,0 +1,61 @@
+<%
+  // Load all posts and group by year -> month
+  var allPosts = site.posts.sort('-date').toArray();
+  var grouped = {};
+  allPosts.forEach(function(post){
+    var year = date(post.date, 'YYYY');
+    var month = date(post.date, 'MM');
+    if (!grouped[year]) grouped[year] = {};
+    if (!grouped[year][month]) grouped[year][month] = [];
+    grouped[year][month].push(post);
+  });
+  var years = Object.keys(grouped).sort(function(a, b){ return b - a; });
+  var monthNames = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+%>
+
+<div class="cb-archive">
+    <div class="cb-archive-content">
+        <header class="cb-archive-header">
+            <h1 class="cb-title cb-archive-title">归档</h1>
+            <div class="cb-gradient-line" style="max-width:80px;"></div>
+            <p class="cb-mono cb-archive-subtitle">共 <%= allPosts.length %> 篇文章</p>
+        </header>
+
+        <div class="cb-timeline">
+            <% years.forEach(function(year, yIdx){ %>
+            <div class="cb-timeline-year-group<%= yIdx === 0 ? ' open' : '' %>">
+                <button class="cb-timeline-year-header" type="button" aria-expanded="<%= yIdx === 0 ? 'true' : 'false' %>">
+                    <span class="cb-timeline-dot"></span>
+                    <span class="cb-timeline-year-text"><%= year %></span>
+                    <span class="cb-timeline-count"><%= allPosts.filter(function(p){ return date(p.date, 'YYYY') === year; }).length %> 篇</span>
+                    <i data-lucide="chevron-down" class="cb-timeline-chevron"></i>
+                </button>
+                <div class="cb-timeline-posts">
+                    <div class="cb-timeline-months">
+                        <% Object.keys(grouped[year]).sort(function(a, b){ return b - a; }).forEach(function(month, mIdx){ %>
+                        <div class="cb-timeline-month-group">
+                            <button class="cb-timeline-month-header" type="button" aria-expanded="false">
+                                <span class="cb-timeline-month-dot"></span>
+                                <span class="cb-timeline-month-text"><%= monthNames[parseInt(month, 10) - 1] %></span>
+                                <span class="cb-timeline-count"><%= grouped[year][month].length %> 篇</span>
+                                <i data-lucide="chevron-right" class="cb-timeline-month-chevron"></i>
+                            </button>
+                            <div class="cb-timeline-month-posts">
+                                <ul class="cb-timeline-list">
+                                    <% grouped[year][month].forEach(function(post){ %>
+                                    <li class="cb-timeline-item">
+                                        <span class="cb-timeline-item-date"><%= date(post.date, 'DD') %></span>
+                                        <a href="<%- url_for(post.path) %>" class="cb-timeline-item-title"><%= post.title %></a>
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</div>

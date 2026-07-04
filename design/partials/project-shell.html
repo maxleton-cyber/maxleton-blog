@@ -1,0 +1,192 @@
+<!-- project-shell: shared navigation + footer wrapper -->
+<!-- SLOT: pageTitle — page-specific <title> text (filled by leaf pages via fill-html-head.mjs) -->
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="cb-nav" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  font-family: var(--font-body);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+" data-dom-id="global-nav">
+  <!-- Bottom gradient cyan line -->
+  <div class="cb-nav-line" style="
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+    opacity: 0.35;
+  "></div>
+
+  <!-- Nav inner container -->
+  <div style="
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  ">
+    <!-- Logo / Site name -->
+    <a href="#" class="cb-nav-logo" style="
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--color-text-primary);
+      font-family: var(--font-mono);
+      font-size: var(--text-lg);
+      font-weight: var(--font-medium);
+      letter-spacing: var(--tracking-wide);
+      transition: color var(--transition-fast);
+    " data-dom-id="nav-logo">
+      <span style="
+        color: var(--color-primary);
+        font-family: var(--font-mono);
+        font-size: var(--text-xl);
+      ">//</span>
+      <span>MAXLETON</span>
+    </a>
+
+    <!-- Navigation links -->
+    <div style="
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    ">
+      <!-- SLOT: activeNavItem — the currently active nav link gets data-active="true" and cyan styling -->
+      <a href="#" class="cb-nav-link" data-nav-key="home" data-active="true" style="
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        letter-spacing: var(--tracking-wide);
+        text-transform: uppercase;
+        padding: 4px 0;
+        border-bottom: 2px solid transparent;
+        color: var(--color-primary);
+        transition: color var(--transition-fast), border-color var(--transition-fast);
+      ">首页</a>
+
+      <a href="#" class="cb-nav-link" data-nav-key="article" style="
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        letter-spacing: var(--tracking-wide);
+        text-transform: uppercase;
+        padding: 4px 0;
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-secondary);
+        transition: color var(--transition-fast), border-color var(--transition-fast);
+      ">文章</a>
+
+      <a href="#" class="cb-nav-link" data-nav-key="about" style="
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        letter-spacing: var(--tracking-wide);
+        text-transform: uppercase;
+        padding: 4px 0;
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-secondary);
+        transition: color var(--transition-fast), border-color var(--transition-fast);
+      ">关于</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== MAIN CONTENT SLOT ===================== -->
+<!-- Leaf pages insert their <main> content here between nav and footer -->
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="cb-footer" style="
+  width: 100%;
+  margin-top: auto;
+  padding: 48px 0 32px;
+  font-family: var(--font-body);
+  background: var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border-default);
+">
+  <!-- Gradient line separator -->
+  <div class="cb-gradient-line" style="
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.3;
+  "></div>
+
+  <div style="
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  ">
+    <p style="
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      letter-spacing: var(--tracking-wide);
+      margin: 0;
+      text-align: center;
+    ">
+      &copy; 2026 Maxleton &middot; Cyberpunk Minimal
+    </p>
+  </div>
+</footer>
+
+<!-- ===================== SHARED SHELL STYLES ===================== -->
+<!-- Navigation hover/active state rules (CSS-only, no JS) -->
+<style>
+  /* Active nav item — set by SLOT: activeNavItem via data-active="true" */
+  .cb-nav-link[data-active="true"] {
+    color: var(--color-primary) !important;
+    border-bottom-color: var(--color-primary) !important;
+  }
+
+  /* Nav link hover (non-active items only) */
+  .cb-nav-link[data-active="false"]:hover,
+  .cb-nav-link:not([data-active]):hover {
+    color: var(--color-text-primary);
+    border-bottom-color: var(--color-border-hover);
+  }
+
+  /* Nav link focus-visible */
+  .cb-nav-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Logo hover */
+  .cb-nav-logo:hover {
+    color: var(--color-primary);
+  }
+
+  /* Nav scrolled state — will be toggled via JS in leaf pages if needed */
+  .cb-nav.scrolled {
+    background: var(--color-bg-overlay);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .cb-nav-link,
+    .cb-nav-logo,
+    .cb-nav {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

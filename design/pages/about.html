@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于</title>
+    <style id="theme-vars">
+/* Cyberpunk Blog — Edge Runner Official Yellow */
+/* Minimal structure + iconic cyber-yellow accent on deep dark base */
+
+/* === Brand Color System === */
+:root {
+  /* Primary — Cyberpunk: Edge Runners official yellow */
+  --color-primary: #fcee0a;
+  --color-primary-hover: #e5d609;
+  --color-primary-muted: rgba(252, 238, 10, 0.12);
+  --color-primary-subtle: rgba(252, 238, 10, 0.05);
+
+  /* Background system — deep dark with warm blue-black undertone */
+  --color-bg-base: #0a0a0f;
+  --color-bg-elevated: #12121a;
+  --color-bg-surface: #1a1a25;
+  --color-bg-overlay: rgba(10, 10, 15, 0.85);
+
+  /* Text system */
+  --color-text-primary: #e8e8f0;
+  --color-text-secondary: #8888a0;
+  --color-text-muted: #55556a;
+  --color-text-accent: #fcee0a;
+  --color-text-on-primary: #0a0a0f;
+
+  /* Border system */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(252, 238, 10, 0.35);
+  --color-border-focus: #fcee0a;
+
+  /* State colors (semantic only) */
+  --state-success: #00e676;
+  --state-warning: #ffab00;
+  --state-error: #ff3d71;
+  --state-info: #448aff;
+
+  /* === Typography === */
+  --font-display: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter spacing for display */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* Font weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* === Shape System === */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 9999px;
+
+  /* === Spacing System (4px base) === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* === Shadow System — border-first, shadow for floating layers only === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(252, 238, 10, 0.10);
+  --shadow-glow-strong: 0 0 40px rgba(252, 238, 10, 0.18);
+
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* === Typography Classes === */
+.cb-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-title {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-body {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.cb-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+}
+
+.cb-caption {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* === Utility: Neon glow effect === */
+.cb-glow-text {
+  text-shadow: 0 0 10px rgba(252, 238, 10, 0.4), 0 0 30px rgba(252, 238, 10, 0.12);
+}
+
+.cb-glow-border {
+  box-shadow: var(--shadow-glow);
+}
+
+.cb-glow-border-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+/* === Utility: Surface card === */
+.cb-surface {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.cb-surface-elevated {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* === Utility: Gradient accents === */
+.cb-gradient-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.5;
+}
+
+/* === Utility: Grid overlay (subtle cyber texture) === */
+.cb-grid-overlay {
+  background-image:
+    linear-gradient(rgba(252, 238, 10, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252, 238, 10, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* === Utility: Scanline effect === */
+.cb-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+}
+
+/* === @theme inline: Tailwind v4 CSS variable bridge === */
+@theme inline {
+  --color-background: var(--color-bg-base);
+  --color-foreground: var(--color-text-primary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-text-on-primary);
+  --color-muted: var(--color-bg-surface);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-primary-muted);
+  --color-accent-foreground: var(--color-text-accent);
+  --color-border: var(--color-border-default);
+  --color-input: var(--color-border-default);
+  --color-ring: var(--color-border-focus);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--cb-background); color: var(--cb-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased" style="background: #000000;">
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav class="cb-nav" style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      font-family: var(--font-body);
+      transition: background var(--transition-fast), box-shadow var(--transition-fast);
+    " data-dom-id="global-nav">
+      <div class="cb-nav-line" style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+        opacity: 0.35;
+      "></div>
+      <div style="
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      ">
+        <a href="#" class="cb-nav-logo" style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+          color: var(--color-text-primary);
+          font-family: var(--font-mono);
+          font-size: var(--text-lg);
+          font-weight: var(--font-medium);
+          letter-spacing: var(--tracking-wide);
+          transition: color var(--transition-fast);
+        " data-dom-id="nav-home">
+          <span style="
+            color: var(--color-primary);
+            font-family: var(--font-mono);
+            font-size: var(--text-xl);
+          ">//</span>
+          <span>MAXLETON</span>
+        </a>
+        <div style="
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        ">
+          <a href="#" class="cb-nav-link" data-nav-key="home" data-active="false" style="
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            color: var(--color-text-secondary);
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+          ">首页</a>
+          <a href="#" class="cb-nav-link" data-nav-key="article" data-active="false" style="
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            color: var(--color-text-secondary);
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+          ">文章</a>
+          <a href="#" class="cb-nav-link" data-nav-key="about" data-active="true" style="
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            letter-spacing: var(--tracking-wide);
+            text-transform: uppercase;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            color: var(--color-primary);
+            transition: color var(--transition-fast), border-color var(--transition-fast);
+          " data-dom-id="nav-about">关于</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="cb-grid-overlay" style="padding-top: 64px;">
+
+      <!-- ===== HERO SECTION ===== -->
+      <section style="
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 32px 80px;
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+      ">
+        <!-- Terminal prompt -->
+        <p class="cb-mono" style="
+          font-size: var(--text-sm);
+          color: var(--color-text-muted);
+          margin: 0 0 16px;
+          letter-spacing: var(--tracking-wide);
+        ">$ whoami</p>
+        <!-- Author name with glow -->
+        <h1 class="cb-display cb-glow-text" style="
+          font-size: clamp(40px, 6vw, 72px);
+          color: var(--color-primary);
+          margin: 0 0 24px;
+          text-wrap: balance;
+          word-break: keep-all;
+          overflow-wrap: break-word;
+          text-align: center;
+        ">Maxleton</h1>
+        <!-- Tagline -->
+        <p class="cb-body" style="
+          font-size: var(--text-lg);
+          color: var(--color-text-secondary);
+          max-width: 520px;
+          text-align: center;
+          margin: 0;
+          line-height: var(--leading-relaxed);
+        ">开发者 / 技术写作者 / 赛博朋克信徒</p>
+      </section>
+
+      <!-- Gradient separator -->
+      <div class="cb-gradient-line" style="max-width: 1280px; margin: 0 auto;"></div>
+
+      <!-- ===== BIO SECTION ===== -->
+      <section style="
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 80px 32px;
+        width: 100%;
+      ">
+        <div style="max-width: 720px;">
+          <h2 class="cb-title cb-caption" style="
+            font-size: var(--text-sm);
+            color: var(--color-primary);
+            margin: 0 0 32px;
+            letter-spacing: var(--tracking-wider);
+            font-weight: var(--font-medium);
+            text-transform: uppercase;
+          ">// 关于我</h2>
+          <p class="cb-body" style="
+            font-size: var(--text-base);
+            color: var(--color-text-primary);
+            line-height: var(--leading-relaxed);
+            margin: 0 0 20px;
+          ">你好，我是 Maxleton。一名热爱代码与科幻的全栈开发者，坚信技术与艺术在赛博空间交汇。白天写代码，晚上在霓虹灯下调试灵感。</p>
+          <p class="cb-body" style="
+            font-size: var(--text-base);
+            color: var(--color-text-secondary);
+            line-height: var(--leading-relaxed);
+            margin: 0 0 20px;
+          ">这个博客是我的数字据点。在这里记录技术探索、开源项目和偶尔的赛博朋克感悟。每一行代码都是对未来的投票。</p>
+          <p class="cb-body" style="
+            font-size: var(--text-base);
+            color: var(--color-text-secondary);
+            line-height: var(--leading-relaxed);
+            margin: 0;
+          ">我相信简洁是终极的复杂，而最好的界面是让用户忘记界面的存在。</p>
+        </div>
+      </section>
+
+      <!-- Gradient separator -->
+      <div class="cb-gradient-line" style="max-width: 1280px; margin: 0 auto;"></div>
+
+      <!-- ===== TECH STACK SECTION ===== -->
+      <section style="
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 80px 32px;
+        width: 100%;
+      ">
+        <h2 class="cb-title cb-caption" style="
+          font-size: var(--text-sm);
+          color: var(--color-primary);
+          margin: 0 0 32px;
+          letter-spacing: var(--tracking-wider);
+          font-weight: var(--font-medium);
+          text-transform: uppercase;
+        ">// 技术栈</h2>
+        <div style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        ">
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">JavaScript</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">TypeScript</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">React</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Node.js</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Python</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Go</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Docker</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Kubernetes</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Vue</span>
+          <span class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+            cursor: default;
+          ">Rust</span>
+        </div>
+      </section>
+
+      <!-- Gradient separator -->
+      <div class="cb-gradient-line" style="max-width: 1280px; margin: 0 auto;"></div>
+
+      <!-- Gradient separator -->
+      <div class="cb-gradient-line" style="max-width: 1280px; margin: 0 auto;"></div>
+
+      <!-- ===== CONTACT SECTION ===== -->
+      <section style="
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 80px 32px;
+        width: 100%;
+      ">
+        <h2 class="cb-title cb-caption" style="
+          font-size: var(--text-sm);
+          color: var(--color-primary);
+          margin: 0 0 32px;
+          letter-spacing: var(--tracking-wider);
+          font-weight: var(--font-medium);
+          text-transform: uppercase;
+        ">// 联系</h2>
+        <div style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+        ">
+          <a href="#" class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: transparent;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+          " data-dom-id="contact-github">
+            <i data-lucide="github" style="width: 16px; height: 16px;"></i>
+            GitHub
+          </a>
+          <a href="#" class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: transparent;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+          " data-dom-id="contact-twitter">
+            <i data-lucide="twitter" style="width: 16px; height: 16px;"></i>
+            Twitter / X
+          </a>
+          <a href="#" class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: transparent;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+          " data-dom-id="contact-email">
+            <i data-lucide="mail" style="width: 16px; height: 16px;"></i>
+            Email
+          </a>
+          <a href="#" class="cb-mono" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: var(--text-sm);
+            color: var(--color-text-primary);
+            background: transparent;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: border-color var(--transition-fast), color var(--transition-fast);
+          " data-dom-id="contact-rss">
+            <i data-lucide="rss" style="width: 16px; height: 16px;"></i>
+            RSS
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="cb-footer" style="
+      width: 100%;
+      margin-top: auto;
+      padding: 48px 0 32px;
+      font-family: var(--font-body);
+      background: var(--color-bg-elevated);
+      border-top: 1px solid var(--color-border-default);
+    ">
+      <div class="cb-gradient-line" style="
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+        opacity: 0.3;
+      "></div>
+      <div style="
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <p style="
+          font-size: var(--text-sm);
+          color: var(--color-text-muted);
+          font-family: var(--font-mono);
+          letter-spacing: var(--tracking-wide);
+          margin: 0;
+          text-align: center;
+        ">
+          &copy; 2026 Maxleton &middot; Cyberpunk Minimal
+        </p>
+      </div>
+    </footer>
+
+    <!-- Shared nav + page-specific styles -->
+    <style>
+      .cb-nav-link[data-active="true"] {
+        color: var(--color-primary) !important;
+        border-bottom-color: var(--color-primary) !important;
+      }
+      .cb-nav-link[data-active="false"]:hover,
+      .cb-nav-link:not([data-active]):hover {
+        color: var(--color-text-primary);
+        border-bottom-color: var(--color-border-hover);
+      }
+      .cb-nav-link:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+      .cb-nav-logo:hover {
+        color: var(--color-primary);
+      }
+      .cb-nav.scrolled {
+        background: var(--color-bg-overlay);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      /* Tag chip hover */
+      .cb-mono[style*="border: 1px solid"]:hover {
+        border-color: var(--color-border-hover) !important;
+        color: var(--color-text-accent) !important;
+      }
+
+      /* Contact button hover */
+      a.cb-mono[style*="border"]:hover {
+        border-color: var(--color-border-hover) !important;
+        color: var(--color-primary) !important;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cb-nav-link,
+        .cb-nav-logo,
+        .cb-nav,
+        a.cb-mono,
+        .cb-mono[style*="border"] {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

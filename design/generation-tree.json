@@ -1,0 +1,47 @@
+{
+  "root": {
+    "nodeId": "gen-project-shell",
+    "kind": "project-shell",
+    "pageIds": ["page-index", "page-article", "page-about"],
+    "output": "partials/project-shell.html",
+    "sharedRegions": ["header", "footer", "global-background", "brand-css-usage", "type-scale"],
+    "privateRegions": [],
+    "mutableSlots": ["activeNavItem", "pageTitle"],
+    "status": "generated",
+    "children": [
+      {
+        "nodeId": "gen-page-index",
+        "kind": "page-leaf",
+        "pageIds": ["page-index"],
+        "output": "pages/index.html",
+        "sharedRegions": [],
+        "privateRegions": ["hero section", "featured posts grid", "sidebar categories"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "generated",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-article",
+        "kind": "page-leaf",
+        "pageIds": ["page-article"],
+        "output": "pages/article.html",
+        "sharedRegions": [],
+        "privateRegions": ["article header", "article body content", "comments section"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "generated",
+        "children": []
+      },
+      {
+        "nodeId": "gen-page-about",
+        "kind": "page-leaf",
+        "pageIds": ["page-about"],
+        "output": "pages/about.html",
+        "sharedRegions": [],
+        "privateRegions": ["about hero", "bio section", "skills/tech stack", "contact section"],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "generated",
+        "children": []
+      }
+    ]
+  }
+}
