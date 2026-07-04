@@ -1,0 +1,278 @@
+{
+  "project": {
+    "name": "赛博朋克博客",
+    "path": "d:\\Project\\other\\hexo\\maxleton-blog\\cyberpunk-blog-design",
+    "operation": "create",
+    "deviceType": "desktop",
+    "language": "zh-CN",
+    "dashboardMode": false,
+    "replicationMode": null,
+    "sourceUrl": null,
+    "visualSpecExcerpt": null,
+    "styleDefinitionBrief": "Dark cyberpunk minimalism inspired by Lucy from Cyberpunk: Edge Runners — deep dark backgrounds with neon cyan accents, clean grid layouts, subtle scanline textures, monospace code accents, restrained and cold aesthetic",
+    "designRead": "personal tech blog / developer & tech enthusiasts / cold minimal cyberpunk / low-medium density / avoid purple neon and over-saturated gradients",
+    "designDials": {
+      "layoutVariance": 3,
+      "motionIntensity": 2,
+      "visualDensity": 2
+    },
+    "styleContinuityAnchors": {
+      "colorSystem": {
+        "primaryColorRole": "neon cyan (#00f0ff) for accents, links, and interactive highlights on dark backgrounds",
+        "brandHuePolicy": "single primary hue only; categories and tags use neutral tints",
+        "stateColors": "semantic status tokens for success/warning/error/info"
+      },
+      "shapeSystem": "sharp corners (2-6px radius), minimal rounding, rectangular cards with thin borders",
+      "typographySystem": "Inter + Noto Sans SC for display/body; JetBrains Mono for code and technical accents",
+      "spacingSystem": "4px base grid, generous whitespace (8-24rem sections), airy content blocks",
+      "componentLanguage": "thin-bordered cards, monospace labels, gradient accent lines, grid overlays",
+      "surfaceAndDepth": "border-first surfaces (no shadows for static cards), glow effects only for active/hover states",
+      "imageryAndIconography": "dark atmospheric imagery, cyan-tinted photos, minimal icon usage",
+      "interactionTone": "subtle cyan glow on hover, fast transitions, minimal animation"
+    },
+    "sharedProjectShellContract": {
+      "navigationShell": "fixed top nav bar with logo left + nav links center/right, transparent bg with bottom gradient line, active link in cyan",
+      "primaryColorSystem": "single neon cyan hue for all primary interactive elements",
+      "typographySystem": "Inter + Noto Sans SC, JetBrains Mono for code",
+      "radiusScale": "sm:2px, md:6px, lg:10px, xl:14px, full:9999px",
+      "surfaceDepthModel": "border-first surfaces, glow on hover/focus only",
+      "ctaStyle": "filled cyan buttons with dark text, thin-bordered secondary buttons, monospace labels",
+      "alignmentRules": "left-aligned content, centered hero text, consistent 8rem section padding"
+    },
+    "generationTree": {
+      "root": {
+        "nodeId": "gen-project-shell",
+        "kind": "project-shell",
+        "pageIds": ["page-index", "page-article", "page-about"],
+        "output": "partials/project-shell.html",
+        "sharedRegions": ["header", "footer", "global-background", "brand-css-usage", "type-scale"],
+        "privateRegions": [],
+        "mutableSlots": ["activeNavItem", "pageTitle"],
+        "status": "planned",
+        "children": [
+          {
+            "nodeId": "gen-page-index",
+            "kind": "page-leaf",
+            "pageIds": ["page-index"],
+            "output": "pages/index.html",
+            "sharedRegions": [],
+            "privateRegions": ["hero section", "featured posts grid", "sidebar categories"],
+            "mutableSlots": ["activeNavItem", "pageTitle"],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-article",
+            "kind": "page-leaf",
+            "pageIds": ["page-article"],
+            "output": "pages/article.html",
+            "sharedRegions": [],
+            "privateRegions": ["article header", "article body content", "comments section"],
+            "mutableSlots": ["activeNavItem", "pageTitle"],
+            "status": "planned",
+            "children": []
+          },
+          {
+            "nodeId": "gen-page-about",
+            "kind": "page-leaf",
+            "pageIds": ["page-about"],
+            "output": "pages/about.html",
+            "sharedRegions": [],
+            "privateRegions": ["about hero", "bio section", "skills/tech stack", "contact section"],
+            "mutableSlots": ["activeNavItem", "pageTitle"],
+            "status": "planned",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "libraryIdentity": null,
+    "libraryPath": null,
+    "cssFilePath": "d:\\Project\\other\\hexo\\maxleton-blog\\cyberpunk-blog-design\\colors_and_type.css",
+    "brandPrefix": "cb",
+    "themeMode": "dark",
+    "designDecisionSummary": "Dark mode with neon cyan accent, sharp corners, Inter font family, border-first surfaces",
+    "componentContractKind": null,
+    "forbiddenInventedComponents": [],
+    "allowedComponents": [],
+    "styleConstraints": {
+      "radiusMax": 14,
+      "spacingBase": 4,
+      "fontSizeBody": 16,
+      "fontSizeMin": 12,
+      "controlHeightDefault": 36,
+      "controlHeightLarge": 44
+    },
+    "productContext": {
+      "kitType": null,
+      "productType": "personal tech blog"
+    },
+    "actualTokenNameReference": [
+      { "semanticPurpose": "Primary accent color", "tokenName": "color-primary" },
+      { "semanticPurpose": "Primary hover color", "tokenName": "color-primary-hover" },
+      { "semanticPurpose": "Primary muted background", "tokenName": "color-primary-muted" },
+      { "semanticPurpose": "Base background", "tokenName": "color-bg-base" },
+      { "semanticPurpose": "Elevated background", "tokenName": "color-bg-elevated" },
+      { "semanticPurpose": "Surface background", "tokenName": "color-bg-surface" },
+      { "semanticPurpose": "Primary text", "tokenName": "color-text-primary" },
+      { "semanticPurpose": "Secondary text", "tokenName": "color-text-secondary" },
+      { "semanticPurpose": "Muted text", "tokenName": "color-text-muted" },
+      { "semanticPurpose": "Accent text", "tokenName": "color-text-accent" },
+      { "semanticPurpose": "Default border", "tokenName": "color-border-default" },
+      { "semanticPurpose": "Hover border", "tokenName": "color-border-hover" },
+      { "semanticPurpose": "Focus border", "tokenName": "color-border-focus" }
+    ]
+  },
+  "pages": [
+    {
+      "nodeId": "page-index",
+      "slug": "index",
+      "title": "首页",
+      "htmlSrc": "pages/index.html",
+      "pageIndex": 1,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "showcase",
+      "businessScenario": "Blog homepage with hero section and featured article grid",
+      "visualNorthStar": "A dark, atmospheric blog landing with a neon cyan accent line cutting through the hero, crisp monospace category labels, and a clean card grid for posts — feels like Lucy's interface, not a generic template",
+      "compositionPattern": "Hero statement + segmented content grid with sidebar",
+      "continuityAnchors": ["top nav bar with cyan accent", "cb-surface card style", "monospace caption labels", "gradient line separators"],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": ["hero-visual.jpg"],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": []
+    },
+    {
+      "nodeId": "page-article",
+      "slug": "article",
+      "title": "文章详情",
+      "htmlSrc": "pages/article.html",
+      "pageIndex": 2,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "showcase",
+      "businessScenario": "Individual blog article with clean reading experience",
+      "visualNorthStar": "A focused, distraction-free reading page with wide content area, subtle monospace metadata, and a thin cyan accent on the article header — elegant tech documentation meets cyberpunk minimalism",
+      "compositionPattern": "Single-column editorial with metadata bar",
+      "continuityAnchors": ["top nav bar with cyan accent", "monospace metadata labels", "gradient line separators", "cb-surface card style"],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": []
+    },
+    {
+      "nodeId": "page-about",
+      "slug": "about",
+      "title": "关于",
+      "htmlSrc": "pages/about.html",
+      "pageIndex": 3,
+      "stateGroupId": null,
+      "stateRole": null,
+      "baseStatePageId": null,
+      "sharedShellContract": [],
+      "mutableRegions": [],
+      "derivedFromHtmlSrc": null,
+      "derivationType": "original",
+      "sourcePageId": null,
+      "sourceHtmlSrc": null,
+      "pageType": "showcase",
+      "businessScenario": "Personal introduction page with bio, skills, and contact",
+      "visualNorthStar": "A sleek personal page with a monospace terminal-style intro, tech stack displayed as minimalist tags, and a subtle grid overlay background — feels like a cyberpunk character profile",
+      "compositionPattern": "Hero identity + segmented info sections",
+      "continuityAnchors": ["top nav bar with cyan accent", "monospace caption labels", "grid overlay background", "gradient line separators"],
+      "libraryRestraintMode": false,
+      "uiKitPath": null,
+      "componentPlan": [],
+      "imagePlan": [],
+      "chartsRequired": false,
+      "miniProgramStyle": false,
+      "qualityRisks": []
+    }
+  ],
+  "assets": [
+    {
+      "filename": "hero-visual.jpg",
+      "role": "critical-hero",
+      "owningPage": "index",
+      "semanticDescription": "Dark atmospheric cyberpunk cityscape with neon cyan glow, abstract and minimal, suitable as hero background for a tech blog",
+      "status": "planned"
+    }
+  ],
+  "wiringPlan": [
+    {
+      "sourceNodeId": "page-index",
+      "domId": "featured-post-link",
+      "targetPageId": "page-article"
+    },
+    {
+      "sourceNodeId": "page-article",
+      "domId": "nav-home",
+      "targetPageId": "page-index"
+    },
+    {
+      "sourceNodeId": "page-about",
+      "domId": "nav-home",
+      "targetPageId": "page-index"
+    }
+  ],
+  "hiddenInteractionPlan": [
+    {
+      "sourceNodeId": "page-index",
+      "domId": "nav-about",
+      "targetPageId": "page-about",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-article",
+      "domId": "nav-about",
+      "targetPageId": "page-about",
+      "hideEdge": true,
+      "reason": "global nav"
+    },
+    {
+      "sourceNodeId": "page-index",
+      "domId": "nav-home",
+      "targetPageId": "page-index",
+      "hideEdge": true,
+      "reason": "global nav current page"
+    },
+    {
+      "sourceNodeId": "page-article",
+      "domId": "nav-article",
+      "targetPageId": "page-article",
+      "hideEdge": true,
+      "reason": "global nav current page"
+    },
+    {
+      "sourceNodeId": "page-about",
+      "domId": "nav-about",
+      "targetPageId": "page-about",
+      "hideEdge": true,
+      "reason": "global nav current page"
+    }
+  ]
+}

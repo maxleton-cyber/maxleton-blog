@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情</title>
+    <style id="theme-vars">
+/* Cyberpunk Blog — Edge Runner Official Yellow */
+/* Minimal structure + iconic cyber-yellow accent on deep dark base */
+
+/* === Brand Color System === */
+:root {
+  /* Primary — Cyberpunk: Edge Runners official yellow */
+  --color-primary: #fcee0a;
+  --color-primary-hover: #e5d609;
+  --color-primary-muted: rgba(252, 238, 10, 0.12);
+  --color-primary-subtle: rgba(252, 238, 10, 0.05);
+
+  /* Background system — deep dark with warm blue-black undertone */
+  --color-bg-base: #0a0a0f;
+  --color-bg-elevated: #12121a;
+  --color-bg-surface: #1a1a25;
+  --color-bg-overlay: rgba(10, 10, 15, 0.85);
+
+  /* Text system */
+  --color-text-primary: #e8e8f0;
+  --color-text-secondary: #8888a0;
+  --color-text-muted: #55556a;
+  --color-text-accent: #fcee0a;
+  --color-text-on-primary: #0a0a0f;
+
+  /* Border system */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(252, 238, 10, 0.35);
+  --color-border-focus: #fcee0a;
+
+  /* State colors (semantic only) */
+  --state-success: #00e676;
+  --state-warning: #ffab00;
+  --state-error: #ff3d71;
+  --state-info: #448aff;
+
+  /* === Typography === */
+  --font-display: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Type scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+
+  /* Line heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* Letter spacing for display */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+
+  /* Font weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* === Shape System === */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 9999px;
+
+  /* === Spacing System (4px base) === */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* === Shadow System — border-first, shadow for floating layers only === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(252, 238, 10, 0.10);
+  --shadow-glow-strong: 0 0 40px rgba(252, 238, 10, 0.18);
+
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* === Typography Classes === */
+.cb-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-title {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+.cb-body {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+}
+
+.cb-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-regular);
+  line-height: var(--leading-normal);
+}
+
+.cb-caption {
+  font-family: var(--font-body);
+  font-weight: var(--font-regular);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/* === Utility: Neon glow effect === */
+.cb-glow-text {
+  text-shadow: 0 0 10px rgba(252, 238, 10, 0.4), 0 0 30px rgba(252, 238, 10, 0.12);
+}
+
+.cb-glow-border {
+  box-shadow: var(--shadow-glow);
+}
+
+.cb-glow-border-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+/* === Utility: Surface card === */
+.cb-surface {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.cb-surface-elevated {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* === Utility: Gradient accents === */
+.cb-gradient-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.5;
+}
+
+/* === Utility: Grid overlay (subtle cyber texture) === */
+.cb-grid-overlay {
+  background-image:
+    linear-gradient(rgba(252, 238, 10, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252, 238, 10, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* === Utility: Scanline effect === */
+.cb-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+}
+
+/* === @theme inline: Tailwind v4 CSS variable bridge === */
+@theme inline {
+  --color-background: var(--color-bg-base);
+  --color-foreground: var(--color-text-primary);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-text-on-primary);
+  --color-muted: var(--color-bg-surface);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-accent: var(--color-primary-muted);
+  --color-accent-foreground: var(--color-text-accent);
+  --color-border: var(--color-border-default);
+  --color-input: var(--color-border-default);
+  --color-ring: var(--color-border-focus);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  
+  @layer base {
+    body { background: var(--cb-background); color: var(--cb-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="min-h-screen flex flex-col" style="background: var(--color-bg-base); font-family: var(--font-body);">
+
+        <!-- ===================== NAVIGATION (inherited from project-shell) ===================== -->
+        <nav class="cb-nav" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            background: transparent;
+            font-family: var(--font-body);
+            transition: background var(--transition-fast), box-shadow var(--transition-fast);
+        " data-dom-id="global-nav">
+            <!-- Bottom gradient cyan line -->
+            <div class="cb-nav-line" style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+                opacity: 0.35;
+            "></div>
+
+            <!-- Nav inner container -->
+            <div style="
+                width: 100%;
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            ">
+                <!-- Logo / Site name -->
+                <a href="#" class="cb-nav-logo" style="
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    text-decoration: none;
+                    color: var(--color-text-primary);
+                    font-family: var(--font-mono);
+                    font-size: var(--text-lg);
+                    font-weight: var(--font-medium);
+                    letter-spacing: var(--tracking-wide);
+                    transition: color var(--transition-fast);
+                " data-dom-id="nav-home">
+                    <span style="
+                        color: var(--color-primary);
+                        font-family: var(--font-mono);
+                        font-size: var(--text-xl);
+                    ">//</span>
+                    <span>MAXLETON</span>
+                </a>
+
+                <!-- Navigation links -->
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    gap: 32px;
+                ">
+                    <a href="#" class="cb-nav-link" data-nav-key="home" style="
+                        text-decoration: none;
+                        font-size: var(--text-sm);
+                        font-weight: var(--font-medium);
+                        letter-spacing: var(--tracking-wide);
+                        text-transform: uppercase;
+                        padding: 4px 0;
+                        border-bottom: 2px solid transparent;
+                        color: var(--color-text-secondary);
+                        transition: color var(--transition-fast), border-color var(--transition-fast);
+                    ">首页</a>
+
+                    <a href="#" class="cb-nav-link" data-nav-key="article" data-active="true" data-dom-id="nav-article" style="
+                        text-decoration: none;
+                        font-size: var(--text-sm);
+                        font-weight: var(--font-medium);
+                        letter-spacing: var(--tracking-wide);
+                        text-transform: uppercase;
+                        padding: 4px 0;
+                        border-bottom: 2px solid transparent;
+                        color: var(--color-primary);
+                        transition: color var(--transition-fast), border-color var(--transition-fast);
+                    ">文章</a>
+
+                    <a href="#" class="cb-nav-link" data-nav-key="about" style="
+                        text-decoration: none;
+                        font-size: var(--text-sm);
+                        font-weight: var(--font-medium);
+                        letter-spacing: var(--tracking-wide);
+                        text-transform: uppercase;
+                        padding: 4px 0;
+                        border-bottom: 2px solid transparent;
+                        color: var(--color-text-secondary);
+                        transition: color var(--transition-fast), border-color var(--transition-fast);
+                    " data-dom-id="nav-about">关于</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ===================== ARTICLE CONTENT ===================== -->
+        <div style="
+            flex: 1;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 96px 32px 64px;
+        ">
+            <!-- Article container: single-column editorial, centered -->
+            <article style="
+                max-width: 720px;
+                margin: 0 auto;
+            ">
+
+                <!-- ARTICLE HEADER -->
+                <header style="margin-bottom: 0;">
+                    <!-- Article title -->
+                    <h1 class="cb-title cb-glow-text" style="
+                        font-size: clamp(28px, 3.5vw, 48px);
+                        color: var(--color-text-primary);
+                        margin: 0 0 20px 0;
+                        text-wrap: balance;
+                        word-break: keep-all;
+                        overflow-wrap: break-word;
+                        line-height: var(--leading-snug);
+                    ">
+                        构建高性能网络应用
+                    </h1>
+
+                    <!-- Metadata bar: date, category, reading time -->
+                    <div style="
+                        display: flex;
+                        align-items: center;
+                        gap: 24px;
+                        flex-wrap: wrap;
+                    ">
+                        <span class="cb-caption" style="font-family: var(--font-mono);">
+                            <span style="color: var(--color-text-muted);">//</span> 2026-06-28
+                        </span>
+                        <span class="cb-caption" style="
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 6px;
+                            background: var(--color-primary-muted);
+                            color: var(--color-primary);
+                            padding: 2px 10px;
+                            border-radius: var(--radius-sm);
+                            font-family: var(--font-mono);
+                        ">网络编程</span>
+                        <span class="cb-caption" style="font-family: var(--font-mono);">
+                            <i data-lucide="clock" style="width: 13px; height: 13px;"></i>
+                            <span style="margin-left: 4px;">8 MIN READ</span>
+                        </span>
+                    </div>
+                </header>
+
+                <!-- Gradient separator -->
+                <div class="cb-gradient-line" style="margin: 32px 0;"></div>
+
+                <!-- ARTICLE BODY -->
+                <div class="cb-body" style="
+                    color: var(--color-text-primary);
+                    font-size: var(--text-base);
+                    line-height: var(--leading-normal);
+                ">
+                    <!-- Intro paragraph -->
+                    <p style="margin: 0 0 24px 0;">
+                        在当今互联网架构中，<strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">网络应用的性能</strong>直接决定了用户体验的上限。无论是实时通信系统、高并发 API 网关，还是分布式数据同步管道，底层网络模型的选择都会产生深远影响。本文将从 <em style="color: var(--color-text-accent); font-style: italic;">I/O 多路复用</em>、连接池管理和异步调度三个维度，探讨如何构建真正高性能的网络应用。
+                    </p>
+
+                    <!-- H2: I/O Multiplexing -->
+                    <h2 class="cb-title" style="
+                        font-size: var(--text-2xl);
+                        color: var(--color-text-primary);
+                        margin: 48px 0 16px 0;
+                        padding-bottom: 12px;
+                        border-bottom: 1px solid var(--color-border-default);
+                    ">I/O 多路复用</h2>
+
+                    <p style="margin: 0 0 24px 0;">
+                        传统的阻塞 I/O 模型中，每个连接都需要一个独立的线程来处理读写事件。当并发连接数从千级跃升到万级甚至百万级时，线程上下文切换的开销将成为系统瓶颈。<strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">epoll</strong> 和 <strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">kqueue</strong> 的出现彻底改变了这一局面，它们允许单线程同时监控数千个文件描述符的就绪状态。
+                    </p>
+
+                    <!-- Code block -->
+                    <div style="
+                        background: var(--color-bg-elevated);
+                        border: 1px solid var(--color-border-default);
+                        border-top: 2px solid var(--color-primary);
+                        border-radius: var(--radius-md);
+                        padding: 20px 24px;
+                        margin: 0 0 24px 0;
+                        overflow-x: auto;
+                    ">
+                        <pre class="cb-mono" style="
+                            font-size: var(--text-sm);
+                            color: var(--color-text-primary);
+                            margin: 0;
+                            white-space: pre;
+                        "><code>// Go语言中的epoll示例
+func main() {
+    ln, _ := net.Listen("tcp", ":8080")
+    for {
+        conn, err := ln.Accept()
+        if err != nil {
+            log.Printf("accept error: %v", err)
+            continue
+        }
+        go handleConn(conn) // 每个连接启动独立goroutine
+    }
+}</code></pre>
+                    </div>
+
+                    <p style="margin: 0 0 24px 0;">
+                        上面的代码展示了 Go 语言中利用 goroutine 实现的简易并发服务器。与传统的 <code class="cb-mono" style="
+                        font-size: 0.9em;
+                        color: var(--color-text-accent);
+                        background: var(--color-primary-muted);
+                        padding: 2px 6px;
+                        border-radius: var(--radius-sm);
+                    ">thread-per-connection</code> 模型相比，goroutine 的内存占用仅为 2KB 栈空间，使得十万级并发变得轻而易举。
+                    </p>
+
+                    <!-- H2: Connection Pool -->
+                    <h2 class="cb-title" style="
+                        font-size: var(--text-2xl);
+                        color: var(--color-text-primary);
+                        margin: 48px 0 16px 0;
+                        padding-bottom: 12px;
+                        border-bottom: 1px solid var(--color-border-default);
+                    ">连接池管理</h2>
+
+                    <p style="margin: 0 0 24px 0;">
+                        数据库连接、HTTP 长连接、gRPC 通道——这些资源的创建和销毁成本极高。一个设计良好的连接池能够在请求高峰期快速扩展，在低谷期自动回收空闲连接，同时保持最小的资源浪费。
+                    </p>
+
+                    <!-- Blockquote with cyan left border -->
+                    <blockquote style="
+                        margin: 0 0 24px 0;
+                        padding: 16px 20px;
+                        border-left: 3px solid var(--color-primary);
+                        background: var(--color-primary-subtle);
+                        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+                        color: var(--color-text-secondary);
+                        font-style: italic;
+                    ">
+                        <p style="margin: 0;">
+                            连接池的核心不在于池的大小，而在于对连接生命周期的精确控制。一个泄漏的连接比一个缓慢的查询更具破坏力。
+                        </p>
+                    </blockquote>
+
+                    <p style="margin: 0 0 24px 0;">
+                        在实践中，我们需要关注以下几个关键指标：
+                    </p>
+
+                    <!-- Sample list -->
+                    <ul style="
+                        margin: 0 0 24px 0;
+                        padding-left: 20px;
+                        color: var(--color-text-primary);
+                    ">
+                        <li style="margin-bottom: 12px; line-height: var(--leading-normal);">
+                            <strong style="color: var(--color-text-accent);">最小连接数</strong> — 保证系统冷启动时的响应速度，避免突发流量下的连接创建风暴
+                        </li>
+                        <li style="margin-bottom: 12px; line-height: var(--leading-normal);">
+                            <strong style="color: var(--color-text-accent);">最大连接数</strong> — 防止资源耗尽导致的级联故障，同时触发优雅的限流策略
+                        </li>
+                        <li style="margin-bottom: 12px; line-height: var(--leading-normal);">
+                            <strong style="color: var(--color-text-accent);">空闲回收超时</strong> — 在低流量时段自动释放多余连接，降低后端服务的维持成本
+                        </li>
+                        <li style="margin-bottom: 0; line-height: var(--leading-normal);">
+                            <strong style="color: var(--color-text-accent);">健康检查间隔</strong> — 定期验证连接可用性，提前剔除已失效的连接，避免请求级别的重试开销
+                        </li>
+                    </ul>
+
+                    <!-- H3: sub-section -->
+                    <h3 class="cb-title" style="
+                        font-size: var(--text-xl);
+                        color: var(--color-text-primary);
+                        margin: 32px 0 12px 0;
+                    ">异步调度策略</h3>
+
+                    <p style="margin: 0 0 24px 0;">
+                        异步 I/O 的本质是将等待操作与计算操作解耦。在现代运行时中，事件循环（Event Loop）负责监控 I/O 就绪事件，将回调函数分发给工作线程执行。这种模型在 <em style="color: var(--color-text-accent); font-style: italic;">Node.js</em>、<em style="color: var(--color-text-accent); font-style: italic;">Tokio</em>（Rust）和 <em style="color: var(--color-text-accent); font-style: italic;">Go</em> 的运行时调度器中都有各自的实现方式。
+                    </p>
+
+                    <p style="margin: 0 0 24px 0;">
+                        性能优化的最终目标不是追求某个单一指标的极致，而是在<strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">吞吐量</strong>、<strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">延迟</strong>和<strong style="color: var(--color-text-primary); font-weight: var(--font-semibold);">资源效率</strong>之间找到适合业务场景的平衡点。过度优化某一维度往往会导致其他维度的退化——这也是为什么性能调优既是工程问题，也是权衡的艺术。
+                    </p>
+                </div>
+
+                <!-- Gradient separator before back link -->
+                <div class="cb-gradient-line" style="margin: 48px 0 32px;"></div>
+
+                <!-- Back to Home link -->
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                ">
+                    <a href="#" style="
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        text-decoration: none;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                        font-size: var(--text-sm);
+                        letter-spacing: var(--tracking-wide);
+                        transition: color var(--transition-fast);
+                    " data-dom-id="back-home">
+                        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                        <span>返回首页</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- ===================== FOOTER (inherited from project-shell) ===================== -->
+        <footer class="cb-footer" style="
+            width: 100%;
+            margin-top: auto;
+            padding: 48px 0 32px;
+            font-family: var(--font-body);
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border-default);
+        ">
+            <!-- Gradient line separator -->
+            <div class="cb-gradient-line" style="
+                width: 100%;
+                max-width: 1280px;
+                margin: 0 auto 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+                opacity: 0.3;
+            "></div>
+
+            <div style="
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            ">
+                <p style="
+                    font-size: var(--text-sm);
+                    color: var(--color-text-muted);
+                    font-family: var(--font-mono);
+                    letter-spacing: var(--tracking-wide);
+                    margin: 0;
+                    text-align: center;
+                ">
+                    &copy; 2026 Maxleton &middot; Cyberpunk Minimal
+                </p>
+            </div>
+        </footer>
+
+    </main>
+    <!-- Shared shell styles (in body per free-explore rules) -->
+    <style>
+      /* Active nav item — set by SLOT: activeNavItem via data-active="true" */
+      .cb-nav-link[data-active="true"] {
+        color: var(--color-primary) !important;
+        border-bottom-color: var(--color-primary) !important;
+      }
+
+      /* Nav link hover (non-active items only) */
+      .cb-nav-link[data-active="false"]:hover,
+      .cb-nav-link:not([data-active]):hover {
+        color: var(--color-text-primary);
+        border-bottom-color: var(--color-border-hover);
+      }
+
+      /* Nav link focus-visible */
+      .cb-nav-link:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+
+      /* Logo hover */
+      .cb-nav-logo:hover {
+        color: var(--color-primary);
+      }
+
+      /* Back to home link hover */
+      [data-dom-id="back-home"]:hover {
+        color: var(--color-primary);
+      }
+
+      /* Nav scrolled state */
+      .cb-nav.scrolled {
+        background: var(--color-bg-overlay);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .cb-nav-link,
+        .cb-nav-logo,
+        .cb-nav,
+        [data-dom-id="back-home"] {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

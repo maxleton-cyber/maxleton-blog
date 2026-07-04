@@ -1,1 +1,5 @@
-# 这是about页面
+---
+title: 关于
+layout: about
+about: true
+---

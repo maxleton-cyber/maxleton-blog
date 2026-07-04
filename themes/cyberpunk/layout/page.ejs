@@ -1,0 +1,80 @@
+<% if (page.about) { %>
+<!-- ABOUT PAGE -->
+<main class="cb-about-main cb-grid-overlay">
+    <section class="cb-about-hero">
+        <p class="cb-about-prompt">$ whoami</p>
+        <h1 class="cb-display cb-glow-text cb-about-name"><%= theme.author_name %></h1>
+        <p class="cb-body cb-about-tagline"><%= theme.about.tagline %></p>
+    </section>
+
+    <div class="cb-gradient-line" style="max-width:var(--content-max-width);margin:0 auto;"></div>
+
+    <!-- BIO SECTION -->
+    <section class="cb-about-section">
+        <div class="cb-about-section-content">
+            <h2 class="cb-title cb-about-section-title">// 关于我</h2>
+            <div class="cb-about-bio">
+                <% theme.about.bio.forEach(function(p){ %>
+                    <p><%= p %></p>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <div class="cb-gradient-line" style="max-width:var(--content-max-width);margin:0 auto;"></div>
+
+    <!-- TECH STACK SECTION -->
+    <section class="cb-about-section">
+        <h2 class="cb-title cb-about-section-title">// 技术栈</h2>
+        <div class="cb-tech-stack">
+            <% theme.about.tech_stack.forEach(function(tech){ %>
+                <span class="cb-mono cb-tech-item"><%= tech %></span>
+            <% }) %>
+        </div>
+    </section>
+
+    <div class="cb-gradient-line" style="max-width:var(--content-max-width);margin:0 auto;"></div>
+
+    <!-- CONTACT SECTION -->
+    <section class="cb-about-section">
+        <h2 class="cb-title cb-about-section-title">// 联系</h2>
+        <div class="cb-contact-list">
+            <% if (theme.social.github) { %>
+            <a href="<%= theme.social.github %>" class="cb-mono cb-contact-link">
+                <i data-lucide="github" style="width:16px;height:16px;"></i>
+                GitHub
+            </a>
+            <% } %>
+            <% if (theme.social.twitter) { %>
+            <a href="<%= theme.social.twitter %>" class="cb-mono cb-contact-link">
+                <i data-lucide="twitter" style="width:16px;height:16px;"></i>
+                Twitter / X
+            </a>
+            <% } %>
+            <% if (theme.social.email) { %>
+            <a href="<%= theme.social.email %>" class="cb-mono cb-contact-link">
+                <i data-lucide="mail" style="width:16px;height:16px;"></i>
+                Email
+            </a>
+            <% } %>
+            <a href="<%- url_for('/atom.xml') %>" class="cb-mono cb-contact-link">
+                <i data-lucide="rss" style="width:16px;height:16px;"></i>
+                RSS
+            </a>
+        </div>
+    </section>
+</main>
+<% } else { %>
+<!-- GENERIC PAGE -->
+<div class="cb-article-container">
+    <article class="cb-article">
+        <header class="cb-article-header">
+            <h1 class="cb-title cb-glow-text cb-article-title"><%= page.title %></h1>
+        </header>
+        <div class="cb-gradient-line" style="margin:32px 0;"></div>
+        <div class="cb-body cb-article-body">
+            <%- page.content %>
+        </div>
+    </article>
+</div>
+<% } %>

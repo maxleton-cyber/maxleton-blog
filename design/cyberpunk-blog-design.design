@@ -1,0 +1,135 @@
+{
+  "data": [
+    {
+      "id": "page-index",
+      "title": "首页",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1783071000000,
+      "canvasData": {
+        "x": 620,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": [
+          {
+            "domId": "featured-post-link",
+            "targetPageId": "page-article",
+            "transitionLabel": "阅读全文"
+          },
+          {
+            "domId": "nav-about",
+            "targetPageId": "page-about",
+            "hideEdge": true,
+            "transitionLabel": "关于"
+          },
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-index",
+            "hideEdge": true,
+            "transitionLabel": "首页"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-article",
+      "title": "文章详情",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1783071000000,
+      "canvasData": {
+        "x": 0,
+        "y": 804,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/article.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-index",
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "nav-about",
+            "targetPageId": "page-about",
+            "hideEdge": true,
+            "transitionLabel": "关于"
+          },
+          {
+            "domId": "nav-article",
+            "targetPageId": "page-article",
+            "hideEdge": true,
+            "transitionLabel": "文章"
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-about",
+      "title": "关于",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1783071000000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/about.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-index",
+            "transitionLabel": "返回首页"
+          },
+          {
+            "domId": "nav-about",
+            "targetPageId": "page-about",
+            "hideEdge": true,
+            "transitionLabel": "关于"
+          }
+        ]
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "赛博朋克城市主视觉",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783071100000,
+      "canvasData": {
+        "x": 0,
+        "y": 1483
+      },
+      "devMetadata": {
+        "imageSrc": "assets/hero-visual.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "个人头像",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1783128000000,
+      "canvasData": {
+        "x": 624,
+        "y": 840
+      },
+      "devMetadata": {
+        "imageSrc": "assets/avatar.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": false,
+    "deviceType": "mobile",
+    "projectName": "赛博朋克博客",
+    "designLibrary": null,
+    "showEdge": false
+  }
+}
