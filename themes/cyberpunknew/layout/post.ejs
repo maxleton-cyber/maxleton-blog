@@ -1,0 +1,100 @@
+<div class="cb-article-container">
+    <div class="cb-article-layout">
+        <article class="cb-article">
+        <header class="cb-article-header">
+            <h1 class="cb-title cb-glow-text cb-article-title"><%= page.title %></h1>
+            <div class="cb-article-meta">
+                <span class="cb-article-meta-item">
+                    <span style="color:var(--color-text-muted);">//</span> <%= date(page.date, 'YYYY-MM-DD') %>
+                </span>
+                <% if (page.categories && page.categories.length) { %>
+                <span class="cb-article-meta-item cb-article-meta-cat">
+                    <%= page.categories.first().name %>
+                </span>
+                <% } %>
+                <% if (page.comments) { %>
+                <span class="cb-article-meta-item">
+                    <i data-lucide="clock" style="width:13px;height:13px;"></i>
+                    <span style="margin-left:4px;"><%= Math.max(1, Math.ceil(strip_html(page.content).length / 400)) %> MIN READ</span>
+                </span>
+                <% } %>
+            </div>
+        </header>
+
+        <div class="cb-gradient-line" style="margin:32px 0;"></div>
+
+        <div class="cb-body cb-article-body">
+            <%- page.content %>
+        </div>
+
+        <% if (page.tags && page.tags.length) { %>
+        <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:8px;">
+            <% page.tags.each(function(tag){ %>
+                <a href="<%- url_for(tag.path) %>" class="cb-tag">#<%= tag.name %></a>
+            <% }) %>
+        </div>
+        <% } %>
+
+        <div class="cb-gradient-line" style="margin:48px 0 32px;"></div>
+
+        <div>
+            <a href="<%- url_for('/') %>" class="cb-back-link">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+                <span>返回首页</span>
+            </a>
+        </div>
+
+        <!-- Post nav -->
+        <% if (page.prev || page.next) { %>
+        <nav style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;">
+            <% if (page.prev) { %>
+            <a href="<%- url_for(page.prev.path) %>" style="padding:16px;border:1px solid var(--color-border-default);border-radius:var(--radius-md);transition:border-color var(--transition-fast);">
+                <div class="cb-caption" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:4px;">上一篇</div>
+                <div class="cb-title" style="font-size:var(--text-sm);color:var(--color-text-primary);"><%= page.prev.title %></div>
+            </a>
+            <% } else { %><div></div><% } %>
+            <% if (page.next) { %>
+            <a href="<%- url_for(page.next.path) %>" style="padding:16px;border:1px solid var(--color-border-default);border-radius:var(--radius-md);transition:border-color var(--transition-fast);text-align:right;">
+                <div class="cb-caption" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:4px;">下一篇</div>
+                <div class="cb-title" style="font-size:var(--text-sm);color:var(--color-text-primary);"><%= page.next.title %></div>
+            </a>
+            <% } %>
+        </nav>
+        <% } %>
+        </article>
+        <aside class="cb-toc-sidebar">
+            <div class="cb-profile-card">
+                <img src="<%- url_for(theme.avatar) %>" alt="Avatar" class="cb-profile-avatar">
+                <div class="cb-profile-info">
+                    <h2 class="cb-display cb-profile-name"><%= theme.author_name %></h2>
+                    <p class="cb-mono cb-profile-role"><%= theme.author_role %></p>
+                </div>
+                <div class="cb-gradient-line" style="width:48px;"></div>
+                <p class="cb-body cb-profile-bio"><%= theme.author_bio %></p>
+                <div class="cb-social">
+                    <% if (theme.social.github) { %>
+                    <a href="<%= theme.social.github %>" class="cb-social-btn" aria-label="GitHub">
+                        <i data-lucide="github" style="width:15px;height:15px;"></i>
+                    </a>
+                    <% } %>
+                    <% if (theme.social.twitter) { %>
+                    <a href="<%= theme.social.twitter %>" class="cb-social-btn" aria-label="Twitter/X">
+                        <i data-lucide="twitter" style="width:15px;height:15px;"></i>
+                    </a>
+                    <% } %>
+                    <% if (theme.social.email) { %>
+                    <a href="<%= theme.social.email %>" class="cb-social-btn" aria-label="Email">
+                        <i data-lucide="mail" style="width:15px;height:15px;"></i>
+                    </a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="cb-toc-card">
+                <h3 class="cb-caption cb-toc-title">目录</h3>
+                <nav class="cb-toc" id="cb-toc">
+                    <%- toc(page.content, { list_number: false, max_depth: 3 }) %>
+                </nav>
+            </div>
+        </aside>
+    </div>
+</div>
