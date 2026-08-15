@@ -1,50 +1,52 @@
-<nav class="cb-nav" id="global-nav">
-    <div class="cb-nav-line"></div>
+<%
+  function isCurrent(url) {
+    if (url === '/') return is_home();
+    if (url === '/archives') return is_archive() || is_post();
+    if (url === '/about') return !!page.about;
+    return false;
+  }
+%>
+<header class="cb-nav cb-on-ink" id="global-nav">
     <div class="cb-nav-inner">
-        <a href="<%= config.root %>" class="cb-nav-logo">
-            <span class="cb-nav-logo-mark">//</span>
+        <a href="<%= url_for('/') %>" class="cb-nav-logo" translate="no">
+            <span class="cb-nav-logo-mark" aria-hidden="true"></span>
             <span><%= theme.brand || config.title %></span>
         </a>
-        <button id="mobile-menu-btn" aria-label="打开菜单">
-            <i data-lucide="menu" style="width:20px;height:20px;"></i>
-        </button>
-        <div class="cb-nav-links">
-            <% for (var name in theme.menu) { %>
-                <% var url = theme.menu[name]; %>
-                <% var isActive = false; %>
-                <% if (url === '/' && is_home()) isActive = true; %>
-                <% if (url === '/archives' && (is_archive() || is_post())) isActive = true; %>
-                <% if (url === '/about' && page.about) isActive = true; %>
-                <a href="<%= url_for(url) %>" class="cb-nav-link" data-active="<%= isActive ? 'true' : 'false' %>"><%= name %></a>
-            <% } %>
-        </div>
-    </div>
-</nav>
 
-<div id="mobile-sidebar-overlay"></div>
-<aside id="mobile-sidebar">
-    <button class="mobile-sidebar-close" id="mobile-close-btn">
-        <i data-lucide="x" style="width:16px;height:16px;"></i>
-        CLOSE
+        <nav class="cb-nav-links" aria-label="主导航">
+            <% for (var name in theme.menu) { %>
+                <a href="<%= url_for(theme.menu[name]) %>" class="cb-nav-link"<%= isCurrent(theme.menu[name]) ? ' aria-current="page"' : '' %>><%= name %></a>
+            <% } %>
+        </nav>
+
+        <button type="button" class="cb-nav-toggle" id="drawer-open" aria-label="打开菜单" aria-expanded="false" aria-controls="drawer">
+            <%- partial('_partial/icon', { name: 'menu', size: 20 }) %>
+        </button>
+    </div>
+    <div class="cb-hazard" aria-hidden="true"></div>
+</header>
+
+<div class="cb-drawer-overlay" id="drawer-overlay"></div>
+
+<aside class="cb-drawer cb-on-ink" id="drawer" aria-label="站点菜单">
+    <button type="button" class="cb-drawer-close" id="drawer-close">
+        <%- partial('_partial/icon', { name: 'close', size: 14 }) %>
+        关闭
     </button>
-    <div class="mobile-profile">
-        <img src="<%- url_for(theme.avatar) %>" alt="Avatar">
-        <h3 class="cb-display" style="font-size:var(--text-lg);color:var(--color-text-primary);margin:0;word-break:keep-all;"><%= theme.author_name %></h3>
-        <p class="cb-mono" style="font-size:var(--text-xs);color:var(--color-primary);letter-spacing:var(--tracking-wider);margin:0;"><%= theme.author_role %></p>
-        <div style="display:flex;gap:8px;">
-            <% if (theme.social.github) { %><a href="<%= theme.social.github %>" class="cb-social-btn" style="width:30px;height:30px;"><i data-lucide="github" style="width:14px;height:14px;"></i></a><% } %>
-            <% if (theme.social.twitter) { %><a href="<%= theme.social.twitter %>" class="cb-social-btn" style="width:30px;height:30px;"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a><% } %>
-            <% if (theme.social.email) { %><a href="<%= theme.social.email %>" class="cb-social-btn" style="width:30px;height:30px;"><i data-lucide="mail" style="width:14px;height:14px;"></i></a><% } %>
+
+    <div class="cb-drawer-id">
+        <img class="cb-id-avatar cb-cut" src="<%- url_for(theme.avatar) %>" alt="" width="76" height="76" style="width:56px;height:56px;margin:0;">
+        <div>
+            <p class="cb-id-name" style="font-size:1.125rem;"><%= theme.author_name %></p>
+            <p class="cb-id-role" translate="no"><%= theme.author_role %></p>
         </div>
     </div>
-    <nav class="mobile-nav" aria-label="移动端导航">
+
+    <nav class="cb-drawer-nav" aria-label="移动端导航">
         <% for (var name in theme.menu) { %>
-            <% var url = theme.menu[name]; %>
-            <% var isActive = false; %>
-            <% if (url === '/' && is_home()) isActive = true; %>
-            <% if (url === '/archives' && (is_archive() || is_post())) isActive = true; %>
-            <% if (url === '/about' && page.about) isActive = true; %>
-            <a href="<%= url_for(url) %>" data-active="<%= isActive ? 'true' : 'false' %>"><%= name %></a>
+            <a href="<%= url_for(theme.menu[name]) %>"<%= isCurrent(theme.menu[name]) ? ' aria-current="page"' : '' %>><%= name %></a>
         <% } %>
     </nav>
+
+    <%- partial('_partial/social') %>
 </aside>
