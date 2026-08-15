@@ -1,0 +1,56 @@
+<%
+  var grouped = {};
+  posts.forEach(function(post){
+    var y = date(post.date, 'YYYY');
+    var m = date(post.date, 'MM');
+    if (!grouped[y]) grouped[y] = {};
+    if (!grouped[y][m]) grouped[y][m] = [];
+    grouped[y][m].push(post);
+  });
+  var years = Object.keys(grouped).sort(function(a, b){ return b - a; });
+  var monthNames = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+%>
+<div class="cb-tl">
+    <% years.forEach(function(year, yIdx){ %>
+    <%
+      var months = Object.keys(grouped[year]).sort(function(a, b){ return b - a; });
+      var yearTotal = months.reduce(function(sum, m){ return sum + grouped[year][m].length; }, 0);
+      var open = yIdx === 0;
+    %>
+    <section class="cb-tl-year<%= open ? ' is-open' : '' %>">
+        <button type="button" class="cb-tl-btn" aria-expanded="<%= open %>" aria-controls="year-<%= year %>">
+            <span class="cb-tl-year-text"><%= year %></span>
+            <span class="cb-tl-count"><%= yearTotal %> 篇</span>
+            <%- partial('_partial/icon', { name: 'chevron-down', size: 16, cls: 'cb-tl-chev' }) %>
+        </button>
+
+        <div class="cb-tl-body" id="year-<%= year %>">
+            <div>
+                <% months.forEach(function(month, mIdx){ %>
+                <% var mOpen = open && mIdx === 0; %>
+                <div class="cb-tl-month<%= mOpen ? ' is-open' : '' %>">
+                    <button type="button" class="cb-tl-month-btn" aria-expanded="<%= mOpen %>" aria-controls="month-<%= year %>-<%= month %>">
+                        <%- partial('_partial/icon', { name: 'chevron-right', size: 14, cls: 'cb-tl-month-chev' }) %>
+                        <span><%= monthNames[parseInt(month, 10) - 1] %></span>
+                        <span class="cb-tl-count"><%= grouped[year][month].length %> 篇</span>
+                    </button>
+
+                    <div class="cb-tl-body" id="month-<%= year %>-<%= month %>">
+                        <div>
+                            <ul class="cb-tl-list">
+                                <% grouped[year][month].forEach(function(post){ %>
+                                <li class="cb-tl-item">
+                                    <time class="cb-tl-day" datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'DD') %></time>
+                                    <a href="<%- url_for(post.path) %>" class="cb-tl-link"><%= post.title %></a>
+                                </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+    <% }) %>
+</div>

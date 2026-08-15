@@ -1,0 +1,17 @@
+<div class="cb-social">
+    <% if (theme.social.github) { %>
+    <a href="<%= theme.social.github %>" class="cb-social-btn" aria-label="GitHub">
+        <%- partial('_partial/icon', { name: 'github', size: 15 }) %>
+    </a>
+    <% } %>
+    <% if (theme.social.twitter) { %>
+    <a href="<%= theme.social.twitter %>" class="cb-social-btn" aria-label="X">
+        <%- partial('_partial/icon', { name: 'x', size: 14 }) %>
+    </a>
+    <% } %>
+    <% if (theme.social.email) { %>
+    <a href="<%= theme.social.email %>" class="cb-social-btn" aria-label="电子邮件">
+        <%- partial('_partial/icon', { name: 'mail', size: 15 }) %>
+    </a>
+    <% } %>
+</div>

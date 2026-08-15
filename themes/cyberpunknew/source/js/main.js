@@ -1,123 +1,132 @@
-// Cyberpunk Blog Theme — Main JS
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Lucide icons (in case of dynamic content)
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
+/* Monowire — theme behaviour */
+(function () {
+  'use strict';
+
+  function ready(fn) {
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+
+  ready(function () {
+    initDrawer();
+    initToc();
+    initTimeline();
+  });
+
+  function initDrawer() {
+    var drawer = document.getElementById('drawer');
+    var overlay = document.getElementById('drawer-overlay');
+    var openBtn = document.getElementById('drawer-open');
+    var closeBtn = document.getElementById('drawer-close');
+    if (!drawer || !overlay || !openBtn) return;
+
+    var FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    var isOpen = false;
+
+    function setInert(on) {
+      if ('inert' in HTMLElement.prototype) drawer.inert = on;
     }
 
-    // Nav scroll state
-    var nav = document.getElementById('global-nav');
-    if (nav) {
-        var onScroll = function () {
-            if (window.scrollY > 10) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
+    function open() {
+      isOpen = true;
+      setInert(false);
+      drawer.classList.add('is-open');
+      overlay.classList.add('is-open');
+      openBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      if (closeBtn) closeBtn.focus();
     }
 
-    // Mobile sidebar
-    var sidebar = document.getElementById('mobile-sidebar');
-    var overlay = document.getElementById('mobile-sidebar-overlay');
-    var openBtn = document.getElementById('mobile-menu-btn');
-    var closeBtn = document.getElementById('mobile-close-btn');
-
-    function openSidebar() {
-        if (sidebar) sidebar.classList.add('open');
-        if (overlay) overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
+    function close() {
+      if (!isOpen) return;
+      isOpen = false;
+      drawer.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      openBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      setInert(true);
+      openBtn.focus();
     }
 
-    function closeSidebar() {
-        if (sidebar) sidebar.classList.remove('open');
-        if (overlay) overlay.classList.remove('open');
-        document.body.style.overflow = '';
-    }
+    openBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', close);
 
-    if (openBtn) openBtn.addEventListener('click', openSidebar);
-    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
-    if (overlay) overlay.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen) return;
 
-    // Smooth scroll for in-page anchors
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-            var targetId = this.getAttribute('href');
-            if (targetId === '#' || targetId.length < 2) return;
-            var target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
+      if (e.key === 'Escape') {
+        close();
+        return;
+      }
+
+      if (e.key !== 'Tab') return;
+
+      var items = drawer.querySelectorAll(FOCUSABLE);
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
 
-    // TOC scroll highlight
+    setInert(true);
+  }
+
+  /* Highlight the heading currently in view */
+  function initToc() {
     var toc = document.getElementById('cb-toc');
-    if (toc) {
-        var headings = document.querySelectorAll('.cb-article-body h1[id], .cb-article-body h2[id], .cb-article-body h3[id]');
-        var tocLinks = toc.querySelectorAll('a');
-        if (headings.length > 0 && tocLinks.length > 0) {
-            var tocMap = {};
-            tocLinks.forEach(function (link) {
-                var href = link.getAttribute('href');
-                if (href && href.charAt(0) === '#') {
-                    tocMap[href.substring(1)] = link;
-                }
-            });
+    if (!toc || !('IntersectionObserver' in window)) return;
 
-            var current = null;
+    var links = {};
+    Array.prototype.forEach.call(toc.querySelectorAll('a[href^="#"]'), function (link) {
+      links[decodeURIComponent(link.getAttribute('href').slice(1))] = link;
+    });
 
-            function updateToc() {
-                var scrollY = window.scrollY + 100;
-                var lastHeading = null;
+    var headings = Array.prototype.filter.call(
+      document.querySelectorAll('.cb-prose h1[id], .cb-prose h2[id], .cb-prose h3[id]'),
+      function (h) { return links[h.id]; }
+    );
+    if (!headings.length) return;
 
-                headings.forEach(function (heading) {
-                    if (heading.offsetTop <= scrollY) {
-                        lastHeading = heading;
-                    }
-                });
+    var visible = new Set();
 
-                if (lastHeading && lastHeading.id !== current) {
-                    current = lastHeading.id;
-                    tocLinks.forEach(function (link) {
-                        link.classList.remove('cb-toc-active');
-                    });
-                    if (tocMap[lastHeading.id]) {
-                        tocMap[lastHeading.id].classList.add('cb-toc-active');
-                    }
-                }
-
-                if (scrollY < headings[0].offsetTop - 100) {
-                    current = null;
-                    tocLinks.forEach(function (link) {
-                        link.classList.remove('cb-toc-active');
-                    });
-                }
-            }
-
-            window.addEventListener('scroll', updateToc, { passive: true });
-            updateToc();
-        }
+    function highlight() {
+      var active = null;
+      for (var i = 0; i < headings.length; i++) {
+        if (visible.has(headings[i].id)) { active = headings[i].id; break; }
+      }
+      Object.keys(links).forEach(function (id) {
+        links[id].classList.toggle('is-active', id === active);
+      });
     }
 
-    // Timeline drawer (archive page)
-    document.querySelectorAll('.cb-timeline-year-header').forEach(function (header) {
-        header.addEventListener('click', function () {
-            var group = this.parentElement;
-            var isOpen = group.classList.toggle('open');
-            this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-    });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      });
+      highlight();
+    }, { rootMargin: '-80px 0px -70% 0px' });
 
-    // Month drawer (second level)
-    document.querySelectorAll('.cb-timeline-month-header').forEach(function (header) {
-        header.addEventListener('click', function () {
-            var group = this.parentElement;
-            var isOpen = group.classList.toggle('open');
-            this.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
+    headings.forEach(function (h) { observer.observe(h); });
+  }
+
+  /* Archive drawers — years and months */
+  function initTimeline() {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.cb-tl-btn, .cb-tl-month-btn');
+      if (!btn) return;
+
+      var group = btn.parentElement;
+      var open = group.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-});
+  }
+})();

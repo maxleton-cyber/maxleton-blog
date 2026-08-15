@@ -1,5 +1,6 @@
-# Cyberpunk Blog Theme Configuration
-# Inspired by Cyberpunk: Edge Runners — dark minimalism with neon yellow accent
+# Monowire Theme Configuration
+# Lucy's palette (ink night / moon white / monowire cyan) as street-poster
+# graphic design. Every panel is sliced at 45 degrees; the cut edge glows.
 
 # Site identity
 brand: "MAXLETON"
@@ -21,7 +22,7 @@ social:
 
 # About page content
 about:
-  tagline: "开发者 / 博客写作者 /"
+  tagline: "开发者 / 博客写作者"
   bio:
     - "你好，我是 Maxleton。一名热爱代码与科幻的全栈开发者，坚信技术与艺术在赛博空间交汇。白天写代码，晚上在霓虹灯下调试灵感。"
     - "这个博客是我的数字据点。在这里记录技术探索、开源项目和偶尔的赛博朋克感悟。每一行代码都是对未来的投票。"
