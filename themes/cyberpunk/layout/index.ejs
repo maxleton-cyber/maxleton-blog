@@ -2,12 +2,15 @@
     <!-- HERO SECTION -->
     <section class="cb-hero">
         <img src="<%= url_for('static/hero-visual.jpg') %>" alt="Cyberpunk cityscape" class="cb-hero-bg" onerror="this.style.display='none'">
-        <div class="cb-hero-overlay"></div>
         <div class="cb-hero-grid"></div>
         <div class="cb-hero-content">
+            <% if (theme.tagline) { %>
             <p class="cb-hero-tag"><%= theme.tagline %></p>
-            <h1 class="cb-display cb-glow-text cb-hero-title"><%= theme.hero_title %></h1>
+            <% } %>
+            <h1 class="cb-hero-title cb-hero-glitch cb-hero-layers" data-text="<%= theme.hero_title || '个人博客' %>"><span><%= theme.hero_title || '个人博客' %></span></h1>
+            <% if (theme.hero_subtitle) { %>
             <p class="cb-body cb-hero-subtitle"><%= theme.hero_subtitle %></p>
+            <% } %>
             <div class="cb-gradient-line cb-hero-gradient"></div>
         </div>
         <a href="#posts-section" class="cb-hero-scroll">
@@ -21,26 +24,34 @@
         <div class="cb-blog-grid">
             <!-- MAIN CONTENT -->
             <div>
-                <div class="cb-section-heading">
-                    <h2 class="cb-title">近期文章</h2>
-                    <div class="cb-gradient-line"></div>
-                </div>
-
                 <!-- POSTS LIST -->
                 <div>
                     <% page.posts.each(function(post, i){ %>
+                        <% var contentText = strip_html(post.excerpt || post.content); %>
+                        <% var wordCount = contentText.replace(/\s/g, '').length; %>
+                        <% var readTime = Math.ceil(wordCount / 300); %>
                         <a href="<%- url_for(post.path) %>" class="cb-post-item">
                             <div class="cb-post-meta">
-                                <% if (post.sticky) { %>
-                                <span class="cb-post-pin">置顶</span>
-                                <% } %>
-                                <% if (post.categories && post.categories.length) { %>
-                                <span class="cb-post-tag"><%= post.categories.first().name %></span>
-                                <% } %>
                                 <span class="cb-post-date"><%= date(post.date, 'YYYY.MM.DD') %></span>
+                                <span class="cb-post-dot">·</span>
+                                <span class="cb-post-readtime"><%= readTime %> 分钟阅读</span>
+                                <span class="cb-post-dot">·</span>
+                                <span class="cb-post-words"><%= wordCount %> 字</span>
                             </div>
                             <h4 class="cb-title cb-post-title"><%= post.title %></h4>
-                            <p class="cb-body cb-post-excerpt cb-post-excerpt-1"><%= strip_html(post.excerpt || post.content) %></p>
+                            <p class="cb-body cb-post-excerpt"><%= contentText %></p>
+                            <div class="cb-post-bottom">
+                                <% if (post.categories && post.categories.length) { %>
+                                <span class="cb-post-category"><%= post.categories.first().name %></span>
+                                <% } %>
+                                <% if (post.tags && post.tags.length) { %>
+                                <div class="cb-post-tags">
+                                    <% post.tags.each(function(tag){ %>
+                                    <span class="cb-post-tag"><%= tag.name %></span>
+                                    <% }) %>
+                                </div>
+                                <% } %>
+                            </div>
                         </a>
                     <% }) %>
                 </div>
