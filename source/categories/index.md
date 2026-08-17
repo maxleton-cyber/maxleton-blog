@@ -1,4 +1,4 @@
 ---
-title: Categories
-layout: category
+title: 分类
+layout: categories
 ---

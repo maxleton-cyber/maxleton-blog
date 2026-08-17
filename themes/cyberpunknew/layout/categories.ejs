@@ -1,0 +1,27 @@
+<% var cats = site.categories.sort('name', 1).filter(function(c){ return c.length; }).toArray(); %>
+<main id="main" class="cb-main">
+    <header class="cb-page-head cb-on-ink">
+        <div class="cb-shell cb-page-head-inner">
+            <p class="cb-label">目录</p>
+            <h1 class="cb-page-title">分类</h1>
+            <p class="cb-page-sub">共 <%= cats.length %> 个分类 · <%= site.posts.length %> 篇文章</p>
+        </div>
+        <div class="cb-hazard" aria-hidden="true"></div>
+    </header>
+
+    <div class="cb-shell cb-page-body">
+        <% if (!cats.length) { %>
+            <p class="cb-empty">还没有分类。</p>
+        <% } else { %>
+        <div class="cb-tax-grid">
+            <% cats.forEach(function(cat){ %>
+            <a href="<%- url_for(cat.path) %>" class="cb-tax-card cb-cut" style="--cut:14px;--cut-glow:26px;">
+                <span class="cb-numeral cb-tax-count"><%= cat.length %></span>
+                <span class="cb-tax-name"><%= cat.name %></span>
+                <span class="cb-tax-unit">篇文章</span>
+            </a>
+            <% }) %>
+        </div>
+        <% } %>
+    </div>
+</main>

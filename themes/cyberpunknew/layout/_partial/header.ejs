@@ -1,8 +1,13 @@
 <%
   function isCurrent(url) {
-    if (url === '/') return is_home();
-    if (url === '/archives') return is_archive() || is_post();
-    if (url === '/about') return !!page.about;
+    var u = String(url).replace(/\/+$/, '');
+    if (u === '') return is_home();
+    // Hexo marks category and tag listings as archives too, so those have to
+    // be excluded before 归档 will claim them.
+    if (u === '/archives') return (is_archive() && !is_category() && !is_tag()) || is_post();
+    if (u === '/categories') return is_category() || page.layout === 'categories';
+    if (u === '/tags') return is_tag() || page.layout === 'tags';
+    if (u === '/about') return !!page.about;
     return false;
   }
 %>
