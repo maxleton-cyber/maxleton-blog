@@ -18,8 +18,42 @@
 </footer>
 
 <% if (theme.qexo && theme.qexo.enable && theme.qexo.url) { %>
-<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
-<script>
-  loadStatistic(<%- JSON.stringify(theme.qexo.url) %>);
+<%
+  // Strip trailing slash — statistic.js appends "/pub/statistic/" itself.
+  var qexoBase = String(theme.qexo.url).replace(/\/+$/, '');
+%>
+<%# Inline the Qexo statistic call. Cloudflare Rocket Loader rewrites
+    external <script type="text/javascript"> and can leave the footer stuck
+    on the "—" placeholder; data-cfasync opts this block out. %>
+<script data-cfasync="false">
+(function () {
+  var endpoint = <%- JSON.stringify(qexoBase + '/pub/statistic/') %>;
+  var ids = ['qexo-site-uv', 'qexo-site-pv', 'qexo-page-pv'];
+
+  function set(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function fail() {
+    ids.forEach(function (id) { set(id, '—'); });
+  }
+
+  fetch(endpoint, { referrerPolicy: 'no-referrer-when-downgrade' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      if (!data || !data.status) throw new Error((data && data.error) || 'bad response');
+      set('qexo-site-uv', data.site_uv);
+      set('qexo-site-pv', data.site_pv);
+      set('qexo-page-pv', data.page_pv);
+    })
+    .catch(function (err) {
+      console.warn('Qexo statistic failed:', err);
+      fail();
+    });
+})();
 </script>
 <% } %>
