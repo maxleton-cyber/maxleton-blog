@@ -49,3 +49,9 @@ menu:
 
 # Posts
 excerpt_length: 1
+
+# Qexo visitor statistics
+# Backend URL for loadStatistic(); whitelist blog.maxleton.top in Qexo settings.
+qexo:
+  enable: true
+  url: https://adminblog.maxleton.top

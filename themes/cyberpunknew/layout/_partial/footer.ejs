@@ -1,7 +1,25 @@
 <footer class="cb-footer cb-on-ink">
     <div class="cb-hazard" aria-hidden="true"></div>
     <div class="cb-shell cb-footer-inner">
-        <p style="margin:0;">&copy; <%= new Date().getFullYear() %> <%= theme.author_name || config.author %></p>
-        <p style="margin:0;" translate="no">MONOWIRE <span class="cb-footer-mark">/</span> BUILT WITH HEXO</p>
+        <p class="cb-footer-copy">&copy; <%= new Date().getFullYear() %> <%= theme.author_name || config.author %></p>
+
+        <% if (theme.qexo && theme.qexo.enable && theme.qexo.url) { %>
+        <p class="cb-footer-stats" aria-label="站点访问统计">
+            <span>站点访问量 <span id="qexo-site-pv">—</span></span>
+            <span class="cb-footer-mark" aria-hidden="true">/</span>
+            <span>站点访客数 <span id="qexo-site-uv">—</span></span>
+            <span class="cb-footer-mark" aria-hidden="true">/</span>
+            <span>页面访问量 <span id="qexo-page-pv">—</span></span>
+        </p>
+        <% } %>
+
+        <p class="cb-footer-built" translate="no">MONOWIRE <span class="cb-footer-mark">/</span> BUILT WITH HEXO</p>
     </div>
 </footer>
+
+<% if (theme.qexo && theme.qexo.enable && theme.qexo.url) { %>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/statistic.js"></script>
+<script>
+  loadStatistic(<%- JSON.stringify(theme.qexo.url) %>);
+</script>
+<% } %>
