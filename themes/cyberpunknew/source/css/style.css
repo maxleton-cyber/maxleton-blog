@@ -1727,11 +1727,12 @@ button {
 
 .cb-footer-inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 32px 0 calc(32px + env(safe-area-inset-bottom));
+  justify-content: center;
+  gap: 14px;
+  padding: 36px 0 calc(36px + env(safe-area-inset-bottom));
+  text-align: center;
   font-family: var(--font-ui);
   font-size: var(--text-xs);
   font-weight: 500;
@@ -1748,6 +1749,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   color: var(--halo);
 }
@@ -1761,14 +1763,6 @@ button {
 
 .cb-footer-mark {
   color: var(--wire);
-}
-
-@media (max-width: 768px) {
-  .cb-footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
 }
 
 /* ============================================================
