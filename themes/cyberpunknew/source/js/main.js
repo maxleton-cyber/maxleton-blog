@@ -129,4 +129,5 @@
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
+
 })();

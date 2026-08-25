@@ -1038,7 +1038,7 @@ button {
 }
 
 .cb-prose code {
-  font-family: 'Space Grotesk', ui-monospace, monospace;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   font-size: 0.9em;
   background: var(--card);
   border: 2px solid var(--line-ink);
@@ -1046,22 +1046,40 @@ button {
   color: var(--wire-deep);
 }
 
+/* Block code: highlight.js theme owns token colors; force near-black pane */
 .cb-prose pre {
   margin: 0 0 1.5em;
-  padding: 22px 24px;
-  background: var(--ink);
-  color: var(--paper);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  padding: 0;
+  overflow: visible;
+  background: #0d1117;
+  border-radius: 10px;
 }
 
 .cb-prose pre code {
   background: none;
   border: 0;
   padding: 0;
-  font-size: var(--text-sm);
-  line-height: 1.7;
-  color: var(--paper);
+  color: #e6edf3;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.cb-prose pre code.hljs,
+.cb-prose .hljs {
+  border-radius: 10px;
+  background: #0d1117 !important;
+}
+
+.cb-prose .hljs-copy-wrapper {
+  margin: 0 0 1.5em;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0d1117;
+}
+
+.cb-prose .hljs-copy-wrapper pre {
+  margin: 0;
+  background: #0d1117;
 }
 
 .cb-prose table {
@@ -1179,6 +1197,69 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* ============================================================
+   WALINE COMMENTS
+   ============================================================ */
+.cb-comments {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 3px solid var(--ink);
+}
+
+.cb-comments .cb-label {
+  margin-bottom: 20px;
+}
+
+.cb-waline {
+  max-width: var(--measure);
+
+  /* Kill Waline's default green (#27ae60 / #2ecc71) */
+  --waline-theme-color: var(--ink);
+  --waline-active-color: var(--wire-deep);
+  --waline-badge-color: var(--wire-deep);
+  --waline-color: #23262f;
+  --waline-bg-color: var(--card);
+  --waline-bg-color-light: var(--paper);
+  --waline-bg-color-hover: #f0f1f4;
+  --waline-border-color: var(--ink);
+  --waline-border: 2px solid var(--ink);
+  --waline-box-shadow: none;
+  --waline-avatar-radius: 0;
+  --waline-info-bg-color: var(--paper);
+  --waline-info-color: var(--muted);
+  --waline-disable-bg-color: var(--paper);
+  --waline-disable-color: var(--halo);
+}
+
+.cb-waline .wl-panel {
+  border-radius: 0 !important;
+}
+
+.cb-waline .wl-btn {
+  border-radius: 0 !important;
+}
+
+.cb-waline .wl-btn.primary {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  border: 2px solid var(--ink) !important;
+}
+
+.cb-waline .wl-btn.primary:hover,
+.cb-waline .wl-btn.primary:focus-visible {
+  background: var(--wire) !important;
+  border-color: var(--wire) !important;
+  color: var(--ink) !important;
+}
+
+.cb-waline a {
+  color: var(--wire-deep);
+}
+
+.cb-waline a:hover {
+  color: var(--ink);
 }
 
 /* === TOC === */
@@ -1675,7 +1756,7 @@ button {
 }
 
 /* ============================================================
-   CODE HIGHLIGHT (Hexo `highlight` markup)
+   CODE HIGHLIGHT — fallback when highlight.js is off
    ============================================================ */
 .highlight {
   margin: 0 0 1.5em;
@@ -1683,6 +1764,7 @@ button {
   background: var(--ink);
   color: var(--paper);
   overflow-x: auto;
+  border-radius: 10px;
 }
 
 .highlight pre {
@@ -1703,7 +1785,7 @@ button {
 }
 
 .highlight .code {
-  font-family: 'Space Grotesk', ui-monospace, monospace;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   font-size: var(--text-sm);
   color: var(--paper);
 }
@@ -1752,6 +1834,11 @@ button {
 
   .cb-nav-toggle {
     display: inline-flex;
+  }
+
+  /* Drawer is available — don't stack the home rail under the feed */
+  .cb-rail-col {
+    display: none;
   }
 
   .cb-entry {

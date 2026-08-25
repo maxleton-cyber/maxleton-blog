@@ -18,6 +18,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <%- css('css/style.css') %>
+    <%- partial('_partial/highlight_head') %>
+    <% if (is_post() && theme.waline && theme.waline.enable) { %>
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <% } %>
 
     <script defer src="<%- url_for('js/main.js') %>"></script>
 </head>
@@ -26,5 +30,6 @@
     <%- include('_partial/header') %>
     <%- body %>
     <%- include('_partial/footer') %>
+    <%- partial('_partial/highlight_foot') %>
 </body>
 </html>

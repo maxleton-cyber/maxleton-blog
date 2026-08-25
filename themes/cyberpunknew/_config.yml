@@ -55,3 +55,15 @@ excerpt_length: 1
 qexo:
   enable: true
   url: https://adminblog.maxleton.top
+
+# Waline comments (post pages)
+waline:
+  enable: true
+  serverURL: https://waline.maxleton.top
+  lang: zh-CN
+
+# highlight.js + highlightjs-copy (CDN themes, not custom chrome)
+highlightjs:
+  enable: true
+  # Style name under https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/
+  theme: github-dark
