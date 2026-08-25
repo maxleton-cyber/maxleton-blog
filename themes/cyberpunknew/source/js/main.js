@@ -11,6 +11,7 @@
     initDrawer();
     initToc();
     initTimeline();
+    initHighlight();
   });
 
   function initDrawer() {
@@ -128,6 +129,59 @@
       var open = group.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+  }
+
+  /* highlight.js — poll because Cloudflare Rocket Loader may reorder CDN scripts */
+  function initHighlight() {
+    var root = document.querySelector('.cb-prose');
+    if (!root) return;
+
+    var tries = 0;
+    var maxTries = 80;
+
+    function boot() {
+      if (typeof hljs === 'undefined' || typeof CopyButtonPlugin === 'undefined') return false;
+
+      Array.prototype.forEach.call(root.querySelectorAll('figure.highlight'), function (fig) {
+        var lang = '';
+        Array.prototype.some.call(fig.classList, function (cls) {
+          if (cls !== 'highlight') { lang = cls; return true; }
+          return false;
+        });
+        var codeCell = fig.querySelector('.code') || fig;
+        var pre = document.createElement('pre');
+        var code = document.createElement('code');
+        if (lang) code.className = 'language-' + lang;
+        code.textContent = codeCell.innerText || codeCell.textContent || '';
+        pre.appendChild(code);
+        fig.parentNode.replaceChild(pre, fig);
+      });
+
+      Array.prototype.forEach.call(root.querySelectorAll('pre code[class]'), function (code) {
+        Array.prototype.forEach.call(code.classList, function (cls) {
+          if (cls === 'hljs' || cls.indexOf('language-') === 0) return;
+          code.classList.add('language-' + cls);
+        });
+      });
+
+      try {
+        hljs.addPlugin(new CopyButtonPlugin({ autohide: false }));
+        hljs.highlightAll();
+        return true;
+      } catch (err) {
+        console.warn('highlight.js init failed:', err);
+        return false;
+      }
+    }
+
+    function tick() {
+      if (boot()) return;
+      tries += 1;
+      if (tries >= maxTries) return;
+      setTimeout(tick, 50);
+    }
+
+    tick();
   }
 
 })();

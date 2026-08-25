@@ -23,13 +23,12 @@
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
     <% } %>
 
-    <script defer src="<%- url_for('js/main.js') %>"></script>
+    <script defer data-cfasync="false" src="<%- url_for('js/main.js') %>?v=hljs2"></script>
 </head>
 <body>
     <a class="cb-skip" href="#main">跳到主要内容</a>
     <%- include('_partial/header') %>
     <%- body %>
     <%- include('_partial/footer') %>
-    <%- partial('_partial/highlight_foot') %>
 </body>
 </html>
