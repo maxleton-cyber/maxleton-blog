@@ -12,6 +12,10 @@
     %>
     <title><%= pageTitle ? pageTitle + ' · ' + config.title : config.title %></title>
     <meta name="description" content="<%= page.description || page.excerpt && strip_html(page.excerpt).substring(0, 150) || config.description || theme.hero_subtitle %>">
+    <% if (theme.avatar) { %>
+    <link rel="icon" href="<%- url_for(theme.avatar) %>" type="image/webp">
+    <link rel="apple-touch-icon" href="<%- url_for(theme.avatar) %>">
+    <% } %>
     <%- open_graph() %>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
