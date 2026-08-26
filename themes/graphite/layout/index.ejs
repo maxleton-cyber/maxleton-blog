@@ -1,0 +1,130 @@
+<main id="main" class="cb-main">
+    <section class="cb-hero">
+        <div class="cb-shell cb-hero-inner">
+            <div class="cb-hero-copy">
+                <% if (theme.tagline) { %>
+                <p class="cb-hero-eyebrow" translate="no"><%= theme.tagline.replace(/^\/\/\s*/, '') %></p>
+                <% } %>
+                <%
+                  var name = theme.hero_title || config.title;
+                  var head = name.slice(0, -1);
+                  var tail = name.slice(-1);
+                %>
+                <h1 class="cb-hero-title cb-hero-glitch cb-hero-layers" data-text="<%= name %>" translate="no"><span><%= head %><span class="cb-hero-accent"><%= tail %></span></span></h1>
+                <% if (theme.hero_subtitle) { %>
+                <p class="cb-hero-sub"><%= theme.hero_subtitle %></p>
+                <% } %>
+            </div>
+
+            <div class="cb-hero-frame cb-cut">
+                <img class="cb-hero-photo" src="<%- url_for('static/hero-visual.jpg') %>" alt="" width="400" height="400" fetchpriority="high" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <div class="cb-shell cb-layout">
+        <div class="cb-feed-col">
+            <div class="cb-feed-head">
+                <h2 class="cb-label">最近的记录</h2>
+                <span class="cb-feed-count"><%= site.posts.length %> 篇</span>
+            </div>
+
+            <div class="cb-feed" id="feed">
+                <% if (!page.posts.length) { %>
+                    <p class="cb-empty">还没有文章。</p>
+                <% } %>
+
+                <% page.posts.each(function(post){ %>
+                    <%
+                      var text = strip_html(post.excerpt || post.content).trim();
+                      var words = text.replace(/\s/g, '').length;
+                      var minutes = Math.max(1, Math.ceil(words / 300));
+                    %>
+                    <a href="<%- url_for(post.path) %>" class="cb-entry cb-cut">
+                        <time class="cb-entry-date" datetime="<%= date_xml(post.date) %>">
+                            <%= date(post.date, 'MM.DD') %>
+                            <span class="cb-entry-year"><%= date(post.date, 'YYYY') %></span>
+                        </time>
+
+                        <div class="cb-entry-body">
+                            <h3 class="cb-entry-title"><%= post.title %></h3>
+
+                            <% if (text) { %>
+                            <p class="cb-entry-excerpt"><%= text %></p>
+                            <% } %>
+
+                            <div class="cb-entry-foot">
+                                <% if (post.categories && post.categories.length) { %>
+                                <span class="cb-chip"><%= post.categories.first().name %></span>
+                                <% } %>
+                                <% post.tags.each(function(tag){ %>
+                                <span class="cb-tag"><%= tag.name %></span>
+                                <% }) %>
+                                <span class="cb-entry-read"><%= minutes %> 分钟 · <%= words %> 字</span>
+                            </div>
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
+
+            <% if (page.total > 1) { %>
+            <nav class="cb-pager" aria-label="分页导航">
+                <% if (page.prev) { %>
+                <a href="<%- url_for(page.prev_link) %>" rel="prev" aria-label="上一页">
+                    <%- partial('_partial/icon', { name: 'chevron-left', size: 16 }) %>
+                </a>
+                <% } %>
+                <% for (var i = 1; i <= page.total; i++) { %>
+                    <% if (i === page.current) { %>
+                        <span class="is-current" aria-current="page"><%= i %></span>
+                    <% } else if (i === 1 || i === page.total || Math.abs(i - page.current) <= 1) { %>
+                        <a href="<%- url_for(i === 1 ? config.root : page.base + 'page/' + i + '/') %>" aria-label="第 <%= i %> 页"><%= i %></a>
+                    <% } else if (Math.abs(i - page.current) === 2) { %>
+                        <span class="is-gap" aria-hidden="true">…</span>
+                    <% } %>
+                <% } %>
+                <% if (page.next) { %>
+                <a href="<%- url_for(page.next_link) %>" rel="next" aria-label="下一页">
+                    <%- partial('_partial/icon', { name: 'chevron-right', size: 16 }) %>
+                </a>
+                <% } %>
+            </nav>
+            <% } %>
+        </div>
+
+        <aside class="cb-rail-col" aria-label="站点信息">
+            <div class="cb-id">
+                <img class="cb-id-avatar cb-cut" src="<%- url_for(theme.avatar) %>" alt="<%= theme.author_name %> 的头像" width="72" height="72" loading="lazy">
+                <p class="cb-id-name"><%= theme.author_name %></p>
+                <p class="cb-id-role" translate="no"><%= theme.author_role %></p>
+                <p class="cb-id-bio"><%= theme.author_bio %></p>
+                <%- partial('_partial/social') %>
+            </div>
+
+            <% if (site.categories && site.categories.length) { %>
+            <nav class="cb-block" aria-labelledby="rail-cats">
+                <h2 class="cb-label cb-block-title" id="rail-cats">分类</h2>
+                <div class="cb-cats">
+                    <% site.categories.sort('name', 1).each(function(cat){ %>
+                    <a href="<%- url_for(cat.path) %>" class="cb-cat">
+                        <span class="cb-cat-name"><%= cat.name %></span>
+                        <span class="cb-cat-count"><%= cat.length %></span>
+                    </a>
+                    <% }) %>
+                </div>
+            </nav>
+            <% } %>
+
+            <% if (site.tags && site.tags.length) { %>
+            <nav class="cb-block" aria-labelledby="rail-tags">
+                <h2 class="cb-label cb-block-title" id="rail-tags">标签</h2>
+                <div class="cb-tags">
+                    <% site.tags.sort('name', 1).each(function(tag){ %>
+                    <a href="<%- url_for(tag.path) %>" class="cb-tag"><%= tag.name %></a>
+                    <% }) %>
+                </div>
+            </nav>
+            <% } %>
+        </aside>
+    </div>
+</main>

@@ -1,0 +1,14 @@
+<% var posts = page.posts ? page.posts.sort('-date').toArray() : []; %>
+<main id="main" class="cb-main">
+    <header class="cb-page-head">
+        <div class="cb-shell cb-page-head-inner">
+            <p class="cb-label">分类</p>
+            <h1 class="cb-page-title"><%= page.category %></h1>
+            <p class="cb-page-sub">共 <%= posts.length %> 篇文章</p>
+        </div>
+</header>
+
+    <div class="cb-shell cb-page-body">
+        <%- partial('_partial/timeline', { posts: posts }) %>
+    </div>
+</main>

@@ -1,0 +1,18 @@
+<% if (theme.waline && theme.waline.enable && theme.waline.serverURL) { %>
+<% var walineServer = String(theme.waline.serverURL).replace(/\/+$/, ''); %>
+<section class="cb-comments" aria-labelledby="cb-comments-title">
+    <h2 class="cb-label" id="cb-comments-title">留言</h2>
+    <div id="waline" class="cb-waline"></div>
+</section>
+
+<script type="module" data-cfasync="false">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+  init({
+    el: '#waline',
+    serverURL: <%- JSON.stringify(walineServer) %>,
+    lang: <%- JSON.stringify(theme.waline.lang || 'zh-CN') %>,
+    dark: false,
+  });
+</script>
+<% } %>

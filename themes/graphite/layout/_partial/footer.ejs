@@ -1,0 +1,54 @@
+<footer class="cb-footer">
+    <div class="cb-shell cb-footer-inner">
+        <p class="cb-footer-copy">&copy; <%= new Date().getFullYear() %> <%= theme.author_name || config.author %></p>
+
+        <% if (theme.qexo && theme.qexo.enable && theme.qexo.url) { %>
+        <p class="cb-footer-stats" aria-label="站点访问统计">
+            <span>站点访问量 <span id="qexo-site-pv">—</span></span>
+            <span class="cb-footer-mark" aria-hidden="true">·</span>
+            <span>站点访客数 <span id="qexo-site-uv">—</span></span>
+            <span class="cb-footer-mark" aria-hidden="true">·</span>
+            <span>页面访问量 <span id="qexo-page-pv">—</span></span>
+        </p>
+        <% } %>
+
+        <p class="cb-footer-built" translate="no">GRAPHITE <span class="cb-footer-mark">/</span> BUILT WITH HEXO</p>
+    </div>
+</footer>
+
+<% if (theme.qexo && theme.qexo.enable && theme.qexo.url) { %>
+<%
+  var qexoBase = String(theme.qexo.url).replace(/\/+$/, '');
+%>
+<script data-cfasync="false">
+(function () {
+  var endpoint = <%- JSON.stringify(qexoBase + '/pub/statistic/') %>;
+  var ids = ['qexo-site-uv', 'qexo-site-pv', 'qexo-page-pv'];
+
+  function set(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function fail() {
+    ids.forEach(function (id) { set(id, '—'); });
+  }
+
+  fetch(endpoint, { referrerPolicy: 'no-referrer-when-downgrade' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      if (!data || !data.status) throw new Error((data && data.error) || 'bad response');
+      set('qexo-site-uv', data.site_uv);
+      set('qexo-site-pv', data.site_pv);
+      set('qexo-page-pv', data.page_pv);
+    })
+    .catch(function (err) {
+      console.warn('Qexo statistic failed:', err);
+      fail();
+    });
+})();
+</script>
+<% } %>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#16181f">
+    <%
+      var pageTitle = page.title;
+      if (!pageTitle && page.category) pageTitle = '分类 · ' + page.category;
+      else if (!pageTitle && page.tag) pageTitle = '标签 · ' + page.tag;
+      else if (!pageTitle && is_archive()) pageTitle = '归档';
+    %>
+    <title><%= pageTitle ? pageTitle + ' · ' + config.title : config.title %></title>
+    <meta name="description" content="<%= page.description || page.excerpt && strip_html(page.excerpt).substring(0, 150) || config.description || theme.hero_subtitle %>">
+    <% if (theme.avatar) { %>
+    <link rel="icon" href="<%- url_for(theme.avatar) %>" type="image/webp">
+    <link rel="apple-touch-icon" href="<%- url_for(theme.avatar) %>">
+    <% } %>
+    <%- open_graph() %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%- url_for('css/style.css') %>?v=ink8">
+    <%- partial('_partial/highlight_head') %>
+    <% if (is_post() && theme.waline && theme.waline.enable) { %>
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+    <% } %>
+
+    <script defer data-cfasync="false" src="<%- url_for('js/main.js') %>?v=ink2"></script>
+</head>
+<body>
+    <a class="cb-skip" href="#main">跳到主要内容</a>
+    <%- include('_partial/header') %>
+    <%- body %>
+    <%- include('_partial/footer') %>
+</body>
+</html>

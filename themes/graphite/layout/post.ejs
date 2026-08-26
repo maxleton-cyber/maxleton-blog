@@ -1,0 +1,77 @@
+<%
+  var body = strip_html(page.content);
+  var words = body.replace(/\s/g, '').length;
+  var minutes = Math.max(1, Math.ceil(words / 300));
+  var toc_html = toc(page.content, { list_number: false, max_depth: 3 });
+%>
+<main id="main" class="cb-main">
+    <header class="cb-article-head">
+        <div class="cb-shell">
+            <div class="cb-article-head-inner">
+                <p class="cb-label">文章</p>
+                <h1 class="cb-article-title"><%= page.title %></h1>
+                <div class="cb-article-meta">
+                    <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
+                    <span class="cb-article-meta-sep" aria-hidden="true">·</span>
+                    <span><%= minutes %> 分钟</span>
+                    <span class="cb-article-meta-sep" aria-hidden="true">·</span>
+                    <span><%= words %> 字</span>
+                </div>
+                <% if (page.categories && page.categories.length) { %>
+                <div class="cb-article-meta" style="margin-top:16px;">
+                    <a class="cb-chip" href="<%- url_for(page.categories.first().path) %>"><%= page.categories.first().name %></a>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </header>
+
+    <div class="cb-shell cb-article-layout<%= toc_html ? '' : ' is-solo' %>">
+        <article class="cb-article">
+            <div class="cb-prose">
+                <%- page.content %>
+            </div>
+
+            <% if (page.tags && page.tags.length) { %>
+            <div class="cb-article-tags">
+                <% page.tags.each(function(tag){ %>
+                <a href="<%- url_for(tag.path) %>" class="cb-tag"><%= tag.name %></a>
+                <% }) %>
+            </div>
+            <% } %>
+
+            <a href="<%- url_for('/') %>" class="cb-back">
+                <%- partial('_partial/icon', { name: 'arrow-left', size: 16 }) %>
+                <span>返回首页</span>
+            </a>
+
+            <% if (page.prev || page.next) { %>
+            <nav class="cb-postnav" aria-label="上下篇导航">
+                <% if (page.prev) { %>
+                <a href="<%- url_for(page.prev.path) %>" class="cb-postnav-item" rel="prev">
+                    <span class="cb-postnav-label">上一篇</span>
+                    <p class="cb-postnav-title"><%= page.prev.title %></p>
+                </a>
+                <% } else { %><div></div><% } %>
+                <% if (page.next) { %>
+                <a href="<%- url_for(page.next.path) %>" class="cb-postnav-item is-next" rel="next">
+                    <span class="cb-postnav-label">下一篇</span>
+                    <p class="cb-postnav-title"><%= page.next.title %></p>
+                </a>
+                <% } %>
+            </nav>
+            <% } %>
+
+            <%- partial('_partial/waline') %>
+        </article>
+
+        <% if (toc_html) { %>
+        <aside class="cb-toc-rail">
+            <nav id="cb-toc" aria-labelledby="toc-title">
+                <h2 class="cb-label cb-block-title" id="toc-title">目录</h2>
+                <div class="cb-toc"><%- toc_html %></div>
+            </nav>
+        </aside>
+        <% } %>
+    </div>
+</main>

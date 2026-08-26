@@ -1,0 +1,54 @@
+<%
+  function isCurrent(url) {
+    var u = String(url).replace(/\/+$/, '');
+    if (u === '') return is_home();
+    if (u === '/archives') return (is_archive() && !is_category() && !is_tag()) || is_post();
+    if (u === '/categories') return is_category() || page.layout === 'categories';
+    if (u === '/tags') return is_tag() || page.layout === 'tags';
+    if (u === '/about') return !!page.about;
+    return false;
+  }
+%>
+<header class="cb-nav" id="global-nav">
+    <div class="cb-nav-inner">
+        <a href="<%= url_for('/') %>" class="cb-nav-logo" translate="no">
+            <span class="cb-nav-logo-mark" aria-hidden="true"></span>
+            <span><%= theme.brand || config.title %></span>
+        </a>
+
+        <nav class="cb-nav-links" aria-label="主导航">
+            <% for (var name in theme.menu) { %>
+                <a href="<%= url_for(theme.menu[name]) %>" class="cb-nav-link"<%= isCurrent(theme.menu[name]) ? ' aria-current="page"' : '' %>><%= name %></a>
+            <% } %>
+        </nav>
+
+        <button type="button" class="cb-nav-toggle" id="drawer-open" aria-label="打开菜单" aria-expanded="false" aria-controls="drawer">
+            <%- partial('_partial/icon', { name: 'menu', size: 20 }) %>
+        </button>
+    </div>
+</header>
+
+<div class="cb-drawer-overlay" id="drawer-overlay"></div>
+
+<aside class="cb-drawer" id="drawer" aria-label="站点菜单">
+    <button type="button" class="cb-drawer-close" id="drawer-close" aria-label="关闭菜单">
+        <%- partial('_partial/icon', { name: 'close', size: 14 }) %>
+        关闭
+    </button>
+
+    <div class="cb-drawer-id">
+        <img class="cb-id-avatar" src="<%- url_for(theme.avatar) %>" alt="" width="56" height="56">
+        <div>
+            <p class="cb-id-name"><%= theme.author_name %></p>
+            <p class="cb-id-role" translate="no"><%= theme.author_role %></p>
+        </div>
+    </div>
+
+    <nav class="cb-drawer-nav" aria-label="移动端导航">
+        <% for (var name in theme.menu) { %>
+            <a href="<%= url_for(theme.menu[name]) %>"<%= isCurrent(theme.menu[name]) ? ' aria-current="page"' : '' %>><%= name %></a>
+        <% } %>
+    </nav>
+
+    <%- partial('_partial/social') %>
+</aside>

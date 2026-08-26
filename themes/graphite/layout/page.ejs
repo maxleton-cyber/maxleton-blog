@@ -1,0 +1,81 @@
+<% if (page.about) { %>
+<main id="main" class="cb-main">
+    <header class="cb-page-head">
+        <div class="cb-shell cb-page-head-inner">
+            <p class="cb-label" translate="no">whoami</p>
+            <h1 class="cb-page-title" translate="no"><%= theme.author_name %></h1>
+            <% if (theme.about.tagline) { %>
+            <p class="cb-page-sub"><%= theme.about.tagline %></p>
+            <% } %>
+        </div>
+</header>
+
+    <div class="cb-shell cb-page-body">
+        <section class="cb-about-section">
+            <h2 class="cb-label">关于我</h2>
+            <div class="cb-about-bio">
+                <% theme.about.bio.forEach(function(para){ %>
+                <p><%= para %></p>
+                <% }) %>
+            </div>
+        </section>
+
+        <% if (theme.about.tech_stack && theme.about.tech_stack.length) { %>
+        <section class="cb-about-section">
+            <h2 class="cb-label">技术栈</h2>
+            <div class="cb-stack">
+                <% theme.about.tech_stack.forEach(function(tech){ %>
+                <span class="cb-stack-item" translate="no"><%= tech %></span>
+                <% }) %>
+            </div>
+        </section>
+        <% } %>
+
+        <section class="cb-about-section">
+            <h2 class="cb-label">联系</h2>
+            <div class="cb-contact">
+                <% if (theme.social.github) { %>
+                <a href="<%= theme.social.github %>" class="cb-contact-link">
+                    <%- partial('_partial/icon', { name: 'github', size: 16 }) %>
+                    GitHub
+                </a>
+                <% } %>
+                <% if (theme.social.twitter) { %>
+                <a href="<%= theme.social.twitter %>" class="cb-contact-link">
+                    <%- partial('_partial/icon', { name: 'x', size: 15 }) %>
+                    X
+                </a>
+                <% } %>
+                <% if (theme.social.email) { %>
+                <a href="<%= theme.social.email %>" class="cb-contact-link">
+                    <%- partial('_partial/icon', { name: 'mail', size: 16 }) %>
+                    Email
+                </a>
+                <% } %>
+                <a href="<%- url_for('/atom.xml') %>" class="cb-contact-link">
+                    <%- partial('_partial/icon', { name: 'rss', size: 16 }) %>
+                    RSS
+                </a>
+            </div>
+        </section>
+    </div>
+</main>
+<% } else { %>
+<main id="main" class="cb-main">
+    <header class="cb-article-head">
+        <div class="cb-shell">
+            <div class="cb-article-head-inner">
+                <h1 class="cb-article-title"><%= page.title %></h1>
+            </div>
+        </div>
+</header>
+
+    <div class="cb-shell cb-article-layout is-solo">
+        <article class="cb-article">
+            <div class="cb-prose">
+                <%- page.content %>
+            </div>
+        </article>
+    </div>
+</main>
+<% } %>

@@ -1,0 +1,38 @@
+<%
+  var tags = site.tags.filter(function(t){ return t.length; }).toArray().sort(function(a, b){
+    return b.length - a.length || a.name.localeCompare(b.name);
+  });
+  // Size is bucketed rather than continuous so the cloud stays on the type
+  // scale instead of drifting into arbitrary pixel sizes.
+  var max = tags.length ? tags[0].length : 1;
+  function tier(n) {
+    if (n >= max * 0.66) return 3;
+    if (n >= max * 0.33) return 2;
+    return 1;
+  }
+%>
+<main id="main" class="cb-main">
+    <header class="cb-page-head">
+        <div class="cb-shell cb-page-head-inner">
+            <p class="cb-label">索引</p>
+            <h1 class="cb-page-title">标签</h1>
+            <p class="cb-page-sub">共 <%= tags.length %> 个标签 · <%= site.posts.length %> 篇文章</p>
+        </div>
+</header>
+
+    <div class="cb-shell cb-page-body">
+        <% if (!tags.length) { %>
+            <p class="cb-empty">还没有标签。</p>
+        <% } else { %>
+        <div class="cb-cloud">
+            <% tags.forEach(function(tag, i){ %>
+            <% var t = tier(tag.length); %>
+            <a href="<%- url_for(tag.path) %>" class="cb-cloud-item is-t<%= t %><%= t === 3 ? ' is-hot' : '' %>" style="--tilt:<%= (i % 3) - 1 %>deg;">
+                <span class="cb-cloud-name"><%= tag.name %></span>
+                <span class="cb-cloud-count"><%= tag.length %></span>
+            </a>
+            <% }) %>
+        </div>
+        <% } %>
+    </div>
+</main>
